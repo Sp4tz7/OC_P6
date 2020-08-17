@@ -1,0 +1,9 @@
+{% if error %}
+    {{ error.messageKey|trans(error.messageData, 'security') }}
+{% endif %}
+<form method="post">
+    <input type="text" value="{{ last_username }}" name="username" placeholder="username" required autofocus>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <button type="submit"> Sign in</button>
+</form>
