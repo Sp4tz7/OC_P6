@@ -109,4 +109,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
+
+    public static function comparePasswords($password, $rePassword):?string
+    {
+        return $password === $rePassword;
+    }
 }
