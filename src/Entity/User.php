@@ -4,9 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -44,6 +42,26 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $is_active;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=256, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
 
     public function getId(): ?int
     {
@@ -92,7 +110,6 @@ class User implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
-
     }
 
     public function getSalt()
@@ -120,6 +137,54 @@ class User implements UserInterface
     public function setIsActive(bool $is_active = false): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }
