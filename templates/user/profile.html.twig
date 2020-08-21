@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    {{ form(form) }}
+    {% if user.getAvatar %}
+        <img src="{{ absolute_url( asset( avatar_img_url ~ user.getAvatar )) | imagine_filter('avatar_thumb') }}">
+    {% endif %}
+    <a href="{{ path('profile-password') }}">change password</a>
+{% endblock %}
