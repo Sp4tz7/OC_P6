@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    {% if error|length > 0 %}
+        {% for e in error %}
+            {{ e }}
+        {% endfor %}
+    {% endif %}
+    {{ form(form) }}
+{% endblock %}
