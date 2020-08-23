@@ -13,6 +13,7 @@ use Lcobucci\JWT\Signer\Key;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -118,9 +119,7 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            $this->validatePassword($form['password']->getData(), $form['rePassword']->getData());
-
+        if ($form->isSubmitted() && $this->validatePassword($form['password']->getData(), $form['rePassword']->getData())) {
             $entityManager = $this->getDoctrine()->getManager();
             $user = $this->getUser();
             $user->setPassword($encoder->encodePassword($user, $form['password']->getData()));
@@ -140,13 +139,14 @@ class UserController extends AbstractController
         );
     }
 
-    protected function validatePassword($password, $rePassword)
+    public function validatePassword($password, $rePassword)
     {
         if (!LoginFormAuthenticator::comparePasswords($password, $rePassword)) {
             $this->addFlash('error', 'The passwords does not matches');
 
-            return $this->redirectToRoute('profile-password');
+            return false;
         }
+        return true;
     }
 
     /**
@@ -163,6 +163,79 @@ class UserController extends AbstractController
             $this->addFlash('success', 'Your account has been activated. Please Login!');
 
             return $this->redirectToRoute('app_login');
+        }
+
+        throw $this->createNotFoundException('The token is not valid');
+    }
+
+    /**
+     * @Route("/password/recovery", name="password-recovery", methods={"GET", "POST"})
+     */
+    public function userPasswordRecovery(UserRepository $userRepository, Request $request, MailerInterface $mailer)
+    {
+        $form = $this->createFormBuilder()
+            ->add('email', EmailType::class)
+            ->add('Reset', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $user = $userRepository->findOneBy(['email' => $form['email']->getData()]);
+            if ($user) {
+                $time = time();
+                $signer = new Sha256();
+                $token = (new Builder())
+                    ->withClaim('mail', $user->getEmail())
+                    ->expiresAt($time + 600)
+                    ->getToken($signer, new Key($_ENV['APP_SECRET']));
+                $user->setToken($token);
+                $entityManager->flush($user);
+                $email = (new TemplatedEmail())
+                    ->from($_ENV['MAILER_FROM'])
+                    ->to(new Address($user->getEmail(), $user->getFirstname()))
+                    ->replyTo($_ENV['MAILER_REPLY_TO'])
+                    ->subject('Password recovery')
+                    ->text('You asked for a password recovery.')
+                    ->htmlTemplate('emails/password-recovery.html.twig')
+                    ->context(['user' => $user]);
+
+                $mailer->send($email);
+            }
+            $this->addFlash('success', 'Your account has been activated. Please Login!');
+        }
+
+        return $this->render('user/password-recovery.html.twig', [
+            'form' => $form->createView(), ]);
+    }
+
+    /**
+     * @Route("/password/recovery/{token}", name="password-recovery-token", methods={"GET", "POST"})
+     */
+    public function userPasswordRecoveryToken(UserRepository $userRepository, $token, Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $userRepository->findOneBy(['token' => $token]);
+        if ($user) {
+            $form = $this->createFormBuilder()
+                ->add('password', PasswordType::class)
+                ->add('rePassword', PasswordType::class)
+                ->add('Save', SubmitType::class)
+                ->getForm();
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $this->validatePassword($form['password']->getData(), $form['rePassword']->getData())) {
+                $user->setPassword($encoder->encodePassword($user, $form['password']->getData()));
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Password has been changed');
+
+                return $this->redirectToRoute('app_login');
+            }
+
+            return $this->render('user/password.html.twig', ['form' => $form->createView()]);
         }
 
         throw $this->createNotFoundException('The token is not valid');
