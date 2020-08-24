@@ -6,6 +6,8 @@
 parameters:
     avatar_img_directory: '%kernel.project_dir%/public/uploads/profile'
     avatar_img_url: '/uploads/profile/'
+    tricks_img_directory: '%kernel.project_dir%/public/uploads/tricks'
+    tricks_img_url: '/uploads/tricks/'
 services:
     # default configuration for services in *this* file
     _defaults:
