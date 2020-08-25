@@ -17,7 +17,6 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setName('Mute');
         $trick->setSlug('mute');
         $trick->setDescription('saisie de la carre frontside de la planche entre les deux pieds avec la main avant');
-        $trick->setImage('mute.jpg');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::ROTATION_CATEGORY_REFERENCE));

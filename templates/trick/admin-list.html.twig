@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin tricks {{ parent() }}{% endblock %}
+{% block body %}
+    {% for trick in tricks %}
+        {% if trick.getImage %}
+            <img src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage ))  }}" alt="{{ trick.getName }}">
+        {% endif %}
+        {{ trick.getName }} -
+        [{% for category in trick.getCategory %}
+        {{ category.getName }} |
+    {% endfor %}]
+        <br>
+    {% endfor %}
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Trick;
 use App\Form\TrickNewType;
+use App\Repository\TrickRepository;
 use App\Service\SlugManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -53,6 +54,36 @@ class TrickController extends AbstractController
         return $this->render('trick/new.html.twig', [
             'controller_name' => 'TrickController',
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/tricks", name="admin-tricks")
+     */
+    public function adminList(TrickRepository $trickRepository)
+    {
+        return $this->render('trick/admin-list.html.twig', [
+            'tricks' => $trickRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/tricks", name="tricks")
+     */
+    public function list(TrickRepository $trickRepository)
+    {
+        return $this->render('trick/list.html.twig', [
+            'tricks' => $trickRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function home(TrickRepository $trickRepository)
+    {
+        return $this->render('trick/list.html.twig', [
+            'tricks' => $trickRepository->findAll(),
         ]);
     }
 }
