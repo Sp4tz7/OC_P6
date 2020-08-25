@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.videos) }}
+<button class="btn btn-black">{{ button|default('Save') }}</button>
+{{ form_end(form) }}

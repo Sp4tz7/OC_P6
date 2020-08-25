@@ -1,14 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block title %}Tricks {{ parent() }}{% endblock %}
 {% block body %}
-    {% for trick in tricks %}
-        {% if trick.getImage %}
-            <img src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage ))  }}" alt="{{ trick.getName }}">
-        {% endif %}
-        {{ trick.getName }} -
-        [{% for category in trick.getCategory %}
-            {{ category.getName }} |
-        {% endfor %}]
-        <br>
+    {% for category in categories %}
+        {{ category.getName }}
+        <ul>
+        {% for trick in category.getTricks %}
+            <li>
+            {% if trick.getImage %}
+                <img src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage )) | imagine_filter('trick_thumb')  }}" alt="{{ trick.getName }}">
+            {% endif %}
+            <a href="{{ path('show-trick', {'category': category.getSlug, 'trick': trick.getSlug}) }}">{{ trick.getName }}</a>
+            [{% for category in trick.getCategory %}
+            <a href="{{ path() }}">{{ category.getName }}</a>
+            {% endfor %}]
+            </li>
+        {% endfor %}
+        </ul>
     {% endfor %}
 {% endblock %}

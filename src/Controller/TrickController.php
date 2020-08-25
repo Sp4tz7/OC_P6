@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Trick;
 use App\Form\TrickNewType;
+use App\Repository\TrickCategoryRepository;
 use App\Repository\TrickRepository;
 use App\Service\SlugManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,17 +30,11 @@ class TrickController extends AbstractController
             $trick->setSlug($slugManager->slugThis($trick->getName()));
             $trick->setAddedBy($this->getUser());
 
-            $oldImage = $trick->getImage();
             $imageFile = $form['image']->getData();
+            $imageDirectory = $this->getParameter('tricks_img_directory');
             if ($imageFile) {
                 $filename = md5(uniqid()).'.'.$imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('tricks_img_directory'),
-                    $filename
-                );
-                if ($oldImage) {
-                    $filesystem->remove($this->getParameter('avatar_img_directory').'/'.$oldImage);
-                }
+                $imageFile->move($imageDirectory, $filename);
                 $trick->setImage($filename);
             }
 
@@ -51,10 +47,78 @@ class TrickController extends AbstractController
             $this->addFlash('success', 'New trick has been added');
         }
 
-        return $this->render('trick/new.html.twig', [
-            'controller_name' => 'TrickController',
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'trick/new.html.twig',
+            [
+                'controller_name' => 'TrickController',
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/admin/trick/edit/{id}", name="trick-edit")
+     */
+    public function trickEdit(Request $request, SlugManager $slugManager, Filesystem $filesystem, TrickRepository $trickRepository, $id)
+    {
+        $trick = $trickRepository->find($id);
+
+        if (!$trick) {
+            throw $this->createNotFoundException('This trick does not exists');
+        }
+
+        $form = $this->createForm(TrickNewType::class, $trick);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $trick->setDateEdit(new \DateTime());
+            $trick->setSlug($slugManager->slugThis($trick->getName()));
+            $trick->setEditedBy($this->getUser());
+
+            $oldImage = $trick->getImage();
+            $imageFile = $form['image']->getData();
+            $imageDirectory = $this->getParameter('tricks_img_directory');
+
+            if ($imageFile) {
+                $filename = md5(uniqid()).'.'.$imageFile->guessExtension();
+                $imageFile->move($imageDirectory, $filename);
+
+                if ($oldImage) {
+                    $filesystem->remove($imageDirectory.'/'.$oldImage);
+                }
+
+                $trick->setImage($filename);
+            }
+
+            $imagesFile = $form['images']->getData();
+            if ($imagesFile) {
+                foreach ($imagesFile as $imageFile) {
+                    $filename = md5(uniqid()).'.'.$imageFile->guessExtension();
+                    $imageFile->move($imageDirectory, $filename);
+
+                    $image = new Image();
+                    $image->setName($filename);
+                    $image->setFileName($filename);
+                    $image->setTrick($trick);
+                    $entityManager->persist($image);
+                    $entityManager->flush();
+                }
+            }
+
+            $entityManager->persist($trick);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'New trick has been edited');
+        }
+
+        return $this->render(
+            'trick/edit.html.twig',
+            [
+                'trick' => $trick,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -62,19 +126,61 @@ class TrickController extends AbstractController
      */
     public function adminList(TrickRepository $trickRepository)
     {
-        return $this->render('trick/admin-list.html.twig', [
-            'tricks' => $trickRepository->findAll(),
-        ]);
+        return $this->render(
+            'trick/admin-list.html.twig',
+            [
+                'tricks' => $trickRepository->findAll(),
+            ]
+        );
     }
 
     /**
      * @Route("/tricks", name="tricks")
      */
-    public function list(TrickRepository $trickRepository)
+    public function list(TrickRepository $trickRepository, TrickCategoryRepository $trickCategoryRepository)
     {
-        return $this->render('trick/list.html.twig', [
-            'tricks' => $trickRepository->findAll(),
-        ]);
+        return $this->render(
+            'trick/list.html.twig',
+            [
+                'tricks' => $trickRepository->findAll(),
+                'categories' => $trickCategoryRepository->findAll(),
+            ]);
+    }
+
+    /**
+     * @Route("/trick/{category}/{trick}", name="show-trick")
+     */
+    public function showTrick(TrickRepository $trickRepository, $category, $trick)
+    {
+        $trick = $trickRepository->findOneBy(['slug' => $trick]);
+        if (!$trick) {
+            throw $this->createNotFoundException('This trick does not exists');
+        }
+
+        return $this->render(
+            'trick/trick.html.twig',
+            [
+                'trick' => $trick,
+            ]
+        );
+    }
+
+    /**
+     * @Route("/tricks/{category}", name="category-tricks")
+     */
+    public function showTricksCategory(TrickCategoryRepository $trickCategoryRepository, $category)
+    {
+        $category = $trickCategoryRepository->findOneBy(['slug' => $category]);
+        if (!$category) {
+            throw $this->createNotFoundException('This category does not exists');
+        }
+
+        return $this->render(
+            'trick/category.html.twig',
+            [
+                'category' => $category,
+            ]
+        );
     }
 
     /**
@@ -82,8 +188,11 @@ class TrickController extends AbstractController
      */
     public function home(TrickRepository $trickRepository)
     {
-        return $this->render('trick/list.html.twig', [
-            'tricks' => $trickRepository->findAll(),
-        ]);
+        return $this->render(
+            'trick/list.html.twig',
+            [
+                'tricks' => $trickRepository->findAll(),
+            ]
+        );
     }
 }
