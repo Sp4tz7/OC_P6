@@ -66,9 +66,21 @@ class Trick
      */
     private $category;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick")
+     */
+    private $images;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="trick", orphanRemoval=true)
+     */
+    private $videos;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,6 +111,7 @@ class Trick
 
         return $this;
     }
+
     public function getDateAdd(): ?\DateTimeInterface
     {
         return $this->date_add;
@@ -172,6 +185,14 @@ class Trick
     }
 
     /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    /**
      * @return Collection|TrickCategory[]
      */
     public function getCategory(): Collection
@@ -192,6 +213,37 @@ class Trick
     {
         if ($this->category->contains($category)) {
             $this->category->removeElement($category);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
+            }
         }
 
         return $this;

@@ -1,14 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block title %}Admin tricks {{ parent() }}{% endblock %}
 {% block body %}
+    <ul>
     {% for trick in tricks %}
+        <li>
         {% if trick.getImage %}
-            <img src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage ))  }}" alt="{{ trick.getName }}">
+            <img src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage )) | imagine_filter('trick_thumb')  }}"
+                 alt="{{ trick.getName }}">
         {% endif %}
         {{ trick.getName }} -
-        [{% for category in trick.getCategory %}
-        {{ category.getName }} |
-    {% endfor %}]
-        <br>
+        {% for category in trick.getCategory %}
+            [{{ category.getName }}]
+        {% endfor %}
+            added by: {{ trick.getAddedBy.getFirstname }} at {{ trick.getDateAdd|date('d.m.Y') }}
+            {% if trick.getEditedBy %}
+            | edited by: {{ trick.getEditedBy.getFirstname }} at {{ trick.getDateEdit|date('d.m.Y') }}
+            {% endif %}
+        | <a href="{{ path('trick-edit', {'id': trick.getId }) }}">edit</a>
+
+        </li>
     {% endfor %}
+    </ul>
 {% endblock %}

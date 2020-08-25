@@ -21,9 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class UserController.
@@ -119,7 +119,10 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $this->validatePassword($form['password']->getData(), $form['rePassword']->getData())) {
+        if ($form->isSubmitted() && $this->validatePassword(
+                $form['password']->getData(),
+                $form['rePassword']->getData()
+            )) {
             $entityManager = $this->getDoctrine()->getManager();
             $user = $this->getUser();
             $user->setPassword($encoder->encodePassword($user, $form['password']->getData()));
@@ -146,6 +149,7 @@ class UserController extends AbstractController
 
             return false;
         }
+
         return true;
     }
 
@@ -205,15 +209,23 @@ class UserController extends AbstractController
             $this->addFlash('success', 'Your account has been activated. Please Login!');
         }
 
-        return $this->render('user/password-recovery.html.twig', [
-            'form' => $form->createView(), ]);
+        return $this->render(
+            'user/password-recovery.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
      * @Route("/password/recovery/{token}", name="password-recovery-token", methods={"GET", "POST"})
      */
-    public function userPasswordRecoveryToken(UserRepository $userRepository, $token, Request $request, UserPasswordEncoderInterface $encoder)
-    {
+    public function userPasswordRecoveryToken(
+        UserRepository $userRepository,
+        $token,
+        Request $request,
+        UserPasswordEncoderInterface $encoder
+    ) {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $userRepository->findOneBy(['token' => $token]);
         if ($user) {
@@ -225,7 +237,10 @@ class UserController extends AbstractController
 
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $this->validatePassword($form['password']->getData(), $form['rePassword']->getData())) {
+            if ($form->isSubmitted() && $this->validatePassword(
+                    $form['password']->getData(),
+                    $form['rePassword']->getData()
+                )) {
                 $user->setPassword($encoder->encodePassword($user, $form['password']->getData()));
                 $entityManager->persist($user);
                 $entityManager->flush();
