@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e42e574-0a85-4207-8dac-ebfd552374e7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="4ffcb8cb-23a2-4475-996e-c77e6ab3ae42" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/UserFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable path="composer" />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="users/issue/#6/user_entity" />
+        <entry key="$PROJECT_DIR$" value="milestone/tricks" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,79 +95,70 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/common" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/vendor/symfony/templating" />
+      <path value="$PROJECT_DIR$/vendor/imagine/imagine" />
+      <path value="$PROJECT_DIR$/vendor/liip/imagine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/lexik/jwt-authentication-bundle" />
+      <path value="$PROJECT_DIR$/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
     </include_path>
   </component>
-  <component name="ProjectId" id="1g627SDNNXeTm6msLVKfBJhMHrT" />
+  <component name="ProjectId" id="1gXmJpdsO3j5Rmrvzq1H6DDx9Ax" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../morgane" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/DataFixtures" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.php.quality.tools" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\xtspa\PhpstormProjects\Magneticlab\openclassrooms\david\OC_P6" />
-      <recent name="C:\Users\xtspa\PhpstormProjects\Magneticlab\openclassrooms\david\OC_P6\public" />
+      <recent name="C:\Users\xtspa\PhpstormProjects\Magneticlab\openclassrooms\david\OC_P6\src\DataFixtures" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1e1bd52b-fa45-4316-aeea-f32d2d65840c" name="Default Changelist" comment="" />
-      <created>1597420553298</created>
+      <changelist id="4ffcb8cb-23a2-4475-996e-c77e6ab3ae42" name="Default Changelist" comment="" />
+      <created>1598269243976</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1597420553298</updated>
-      <workItem from="1597420554479" duration="1140000" />
+      <updated>1598269243976</updated>
+      <workItem from="1598269245258" duration="6530000" />
     </task>
     <servers />
-  </component>
-  <component name="TerminalProjectNonSharedOptionsProvider">
-    <option name="shellPath" value="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="540" y="180" key="#PHP_CS_Fixer" timestamp="1597421692539">
+    <state x="690" y="280" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1598276575575">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="540" y="180" key="#PHP_CS_Fixer/3840.0.1920.1050/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1597421692539" />
-    <state x="729" y="227" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597497043860">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="729" y="227" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1597497043860" />
-    <state x="736" y="437" key="ComposerInitDialogKey" timestamp="1597420721167">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="736" y="437" key="ComposerInitDialogKey/3840.0.1920.1050/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1597420721167" />
-    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1597496045723">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1597496045723" />
-    <state x="740" y="280" key="FileChooserDialogImpl/3840.0.1920.1050/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1597421687475" />
-    <state x="540" y="260" key="IDE.errors.dialog" timestamp="1597421362226">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="540" y="260" key="IDE.errors.dialog/3840.0.1920.1050/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1597421362226" />
-    <state x="676" y="245" key="RollbackChangesDialog" timestamp="1597420697371">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="676" y="245" key="RollbackChangesDialog/3840.0.1920.1050/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1597420697371" />
-    <state x="461" y="170" key="SettingsEditor" timestamp="1597421694469">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="461" y="170" key="SettingsEditor/3840.0.1920.1050/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1597421694469" />
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1597494597955">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1597494597955" />
+    <state x="690" y="280" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050/1920.0.1920.1050/3840.0.1920.1050@0.0.1920.1050" timestamp="1598276575575" />
   </component>
 </project>

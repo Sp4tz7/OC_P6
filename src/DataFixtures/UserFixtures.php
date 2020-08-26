@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+    public const ADMIN_USER_REFERENCE = 'admin-user';
+
     private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
@@ -20,7 +22,7 @@ class UserFixtures extends Fixture
     {
         $user = new User();
         $user->setUsername('SuperAdmin');
-        $user->setEmail('example@example.com');
+        $user->setEmail('john.doe@example.com');
         $user->setPassword($this->encoder->encodePassword($user, 'admin123456789'));
         $user->setRoles(['ROLE_SUPER_ADMIN']);
         $user->setFirstname('John');
@@ -30,5 +32,8 @@ class UserFixtures extends Fixture
         $manager->persist($user);
 
         $manager->flush();
+
+        $this->addReference(self::ADMIN_USER_REFERENCE, $user);
+
     }
 }
