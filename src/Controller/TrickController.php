@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Entity\Trick;
+use App\Form\CommentType;
 use App\Form\TrickNewType;
 use App\Repository\TrickCategoryRepository;
 use App\Repository\TrickRepository;
@@ -64,7 +65,6 @@ class TrickController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $trick = $trickRepository->find($id);
         if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->get('_token'))) {
-
             $filesystem->remove($this->getParameter('tricks_img_directory').'/'.$trick->getImage());
             foreach ($trick->getImages() as $image) {
                 $filesystem->remove($this->getParameter('tricks_img_directory').'/'.$image->getFileName());
@@ -179,10 +179,13 @@ class TrickController extends AbstractController
             throw $this->createNotFoundException('This trick does not exists');
         }
 
+        $form = $this->createForm(CommentType::class);
+
         return $this->render(
             'trick/trick.html.twig',
             [
                 'trick' => $trick,
+                'form' => $form->createView(),
             ]
         );
     }

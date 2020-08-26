@@ -17,4 +17,5 @@
         <img src="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) | imagine_filter('trick_thumb')  }}"
              alt="{{ image.getName }}" title="{{ image.getName }}">
     {% endfor %}
+    {{ form(form) }}
 {% endblock %}
