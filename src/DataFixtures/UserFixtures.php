@@ -9,7 +9,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+    public const SUPERADMIN_USER_REFERENCE = 'super-admin-user';
     public const ADMIN_USER_REFERENCE = 'admin-user';
+    public const USER_REFERENCE = 'user';
 
     private $encoder;
 
@@ -20,20 +22,40 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $superAdminUuser = new User();
+        $superAdminUuser->setUsername('SuperAdmin');
+        $superAdminUuser->setEmail('john.doe@example.com');
+        $superAdminUuser->setPassword($this->encoder->encodePassword($superAdminUuser, 'superadmin123456789'));
+        $superAdminUuser->setRoles(['ROLE_SUPER_ADMIN']);
+        $superAdminUuser->setFirstname('John');
+        $superAdminUuser->setLastname('Doe');
+        $superAdminUuser->setIsActive(false);
+        $manager->persist($superAdminUuser);
+
+        $adminUser = new User();
+        $adminUser->setUsername('Admin');
+        $adminUser->setEmail('janne.doe@example.com');
+        $adminUser->setPassword($this->encoder->encodePassword($adminUser, 'admin123456789'));
+        $adminUser->setRoles(['ROLE_ADMIN']);
+        $adminUser->setFirstname('Janne');
+        $adminUser->setLastname('Doe');
+        $adminUser->setIsActive(false);
+        $manager->persist($adminUser);
+
         $user = new User();
-        $user->setUsername('SuperAdmin');
-        $user->setEmail('john.doe@example.com');
-        $user->setPassword($this->encoder->encodePassword($user, 'admin123456789'));
-        $user->setRoles(['ROLE_SUPER_ADMIN']);
+        $user->setUsername('User');
+        $user->setEmail('danald.doe@example.com');
+        $user->setPassword($this->encoder->encodePassword($user, 'user123456789'));
+        $user->setRoles(['USER']);
         $user->setFirstname('John');
         $user->setLastname('Doe');
-        $user->setRoles(['ROLE_SUPER_ADMIN']);
         $user->setIsActive(false);
         $manager->persist($user);
 
         $manager->flush();
 
-        $this->addReference(self::ADMIN_USER_REFERENCE, $user);
-
+        $this->addReference(self::SUPERADMIN_USER_REFERENCE, $superAdminUuser);
+        $this->addReference(self::ADMIN_USER_REFERENCE, $adminUser);
+        $this->addReference(self::USER_REFERENCE, $user);
     }
 }
