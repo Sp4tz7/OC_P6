@@ -17,7 +17,11 @@
             | edited by: {{ trick.getEditedBy.getFirstname }} at {{ trick.getDateEdit|date('d.m.Y') }}
             {% endif %}
         | <a href="{{ path('trick-edit', {'id': trick.getId }) }}">edit</a>
-
+            <form method="POST" action="{{ path('trick-delete', {id: trick.id}) }}">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ trick.id) }}">
+                <button class="btn btn-delete-trick">Supprimer la figure</button>
+            </form>
         </li>
     {% endfor %}
     </ul>

@@ -57,6 +57,28 @@ class TrickController extends AbstractController
     }
 
     /**
+     * @Route("/admin/trick/delete/{id}", name="trick-delete", methods="DELETE")
+     */
+    public function trickDelete(Request $request, TrickRepository $trickRepository, Filesystem $filesystem, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $trick = $trickRepository->find($id);
+        if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->get('_token'))) {
+
+            $filesystem->remove($this->getParameter('tricks_img_directory').'/'.$trick->getImage());
+            foreach ($trick->getImages() as $image) {
+                $filesystem->remove($this->getParameter('tricks_img_directory').'/'.$image->getFileName());
+            }
+
+            $em->remove($trick);
+            $em->flush();
+        }
+        $this->addFlash('success', 'Trick has been deleted');
+
+        return $this->redirectToRoute('admin-tricks');
+    }
+
+    /**
      * @Route("/admin/trick/edit/{id}", name="trick-edit")
      */
     public function trickEdit(Request $request, SlugManager $slugManager, Filesystem $filesystem, TrickRepository $trickRepository, $id)
