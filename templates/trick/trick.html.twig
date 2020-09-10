@@ -17,4 +17,9 @@
         <img src="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) | imagine_filter('trick_thumb')  }}"
              alt="{{ image.getName }}" title="{{ image.getName }}">
     {% endfor %}
+    {% if is_granted('ROLE_USER') %}
+        {{ form(CommentForm) }}
+        {% else %}
+        Please <a href="{{ path('app_login', { 'redirect': 'show-trick', 'category': trick.getCategory.0.getSlug, 'trick': trick.getSlug }) }}">login</a> to leave a comment.
+    {% endif %}
 {% endblock %}

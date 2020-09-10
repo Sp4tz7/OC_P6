@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Image;
 use App\Entity\Trick;
-use App\Form\TrickNewType;
+use App\Form\CommentType;
+use App\Form\TrickType;
 use App\Repository\TrickCategoryRepository;
 use App\Repository\TrickRepository;
 use App\Service\SlugManager;
@@ -21,7 +23,7 @@ class TrickController extends AbstractController
     public function trickAdd(Request $request, SlugManager $slugManager, Filesystem $filesystem)
     {
         $trick = new Trick();
-        $form = $this->createForm(TrickNewType::class, $trick);
+        $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,7 +44,7 @@ class TrickController extends AbstractController
             $entityManager->flush();
 
             $trick = new Trick();
-            $form = $this->createForm(TrickNewType::class, $trick);
+            $form = $this->createForm(TrickType::class, $trick);
 
             $this->addFlash('success', 'New trick has been added');
         }
@@ -64,7 +66,6 @@ class TrickController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $trick = $trickRepository->find($id);
         if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->get('_token'))) {
-
             $filesystem->remove($this->getParameter('tricks_img_directory').'/'.$trick->getImage());
             foreach ($trick->getImages() as $image) {
                 $filesystem->remove($this->getParameter('tricks_img_directory').'/'.$image->getFileName());
@@ -89,7 +90,7 @@ class TrickController extends AbstractController
             throw $this->createNotFoundException('This trick does not exists');
         }
 
-        $form = $this->createForm(TrickNewType::class, $trick);
+        $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -172,17 +173,24 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{category}/{trick}", name="show-trick")
      */
-    public function showTrick(TrickRepository $trickRepository, $category, $trick)
+    public function showTrick(TrickRepository $trickRepository, $trick)
     {
         $trick = $trickRepository->findOneBy(['slug' => $trick]);
         if (!$trick) {
             throw $this->createNotFoundException('This trick does not exists');
         }
 
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment, [
+            'action' => $this->generateUrl('add-comment', ['id' => $trick->getId()]),
+            'method' => 'POST',
+        ]);
+
         return $this->render(
             'trick/trick.html.twig',
             [
                 'trick' => $trick,
+                'CommentForm' => $form->createView(),
             ]
         );
     }
@@ -211,7 +219,7 @@ class TrickController extends AbstractController
     public function home(TrickRepository $trickRepository)
     {
         return $this->render(
-            'trick/list.html.twig',
+            'base.html.twig',
             [
                 'tricks' => $trickRepository->findAll(),
             ]
