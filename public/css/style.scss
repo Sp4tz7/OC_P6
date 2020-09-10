@@ -1,0 +1,17 @@
+$primary-font: 'Roboto', sans-serif;
+$secondary-font: 'Exo 2', cursive;
+$primary-color: #17171a;
+$secondary-color: #f6e8e5;
+$orange-color: #ff1e00;
+$blue-color: #e8f9fd;
+$green-color: #59ce8f;
+
+body {
+  font-family: $primary-font;
+  color: $secondary-color;
+  background-color: $primary-color;
+}
+
+h1 {
+  font-family: $secondary-font;
+}
