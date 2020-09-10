@@ -43,6 +43,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $this->passwordEncoder = $passwordEncoder;
     }
 
+    public static function comparePasswords($password, $rePassword): ?string
+    {
+        return $password === $rePassword;
+    }
+
     public function supports(Request $request)
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
@@ -101,17 +106,17 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        if ($request->get('redirect')) {
+            return new RedirectResponse($this->urlGenerator->generate($request->get('redirect'), [
+                'category' => $request->get('category'),
+                'trick' => $request->get('trick'),
+            ]));
+        }
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
-    }
-
-    public static function comparePasswords($password, $rePassword): ?string
-    {
-        return $password === $rePassword;
     }
 }
