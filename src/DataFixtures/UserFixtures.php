@@ -29,7 +29,8 @@ class UserFixtures extends Fixture
         $superAdminUuser->setRoles(['ROLE_SUPER_ADMIN']);
         $superAdminUuser->setFirstname('John');
         $superAdminUuser->setLastname('Doe');
-        $superAdminUuser->setIsActive(false);
+        $superAdminUuser->setIsActive(true);
+        $superAdminUuser->setAvatar('default_avatar.png');
         $manager->persist($superAdminUuser);
 
         $adminUser = new User();
@@ -39,7 +40,8 @@ class UserFixtures extends Fixture
         $adminUser->setRoles(['ROLE_ADMIN']);
         $adminUser->setFirstname('Janne');
         $adminUser->setLastname('Doe');
-        $adminUser->setIsActive(false);
+        $adminUser->setIsActive(true);
+        $adminUser->setAvatar('default_avatar.png');
         $manager->persist($adminUser);
 
         $user = new User();
@@ -49,7 +51,8 @@ class UserFixtures extends Fixture
         $user->setRoles(['USER']);
         $user->setFirstname('John');
         $user->setLastname('Doe');
-        $user->setIsActive(false);
+        $user->setIsActive(true);
+        $user->setAvatar('default_avatar.png');
         $manager->persist($user);
 
         $manager->flush();

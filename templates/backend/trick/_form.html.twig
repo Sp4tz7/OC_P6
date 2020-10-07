@@ -1,0 +1,49 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-8">
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        <h4>Images</h4>
+        <div class="well mb-5" id="trick_images_list"
+             data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+            {% for row in form.images %}
+                <div class="card item-card  mb-3">
+                    <div class="card-body">
+                        <div class="card-heading">
+                            <img src="{{ asset('uploads/tricks/'~row.vars.value.filename) }}" alt="your image"
+                                 class="img-fluid mb-3 blah" style="max-height: 300px"/>
+                        </div>
+                        {{ form_row(row) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h4>Videos</h4>
+        <div class="well" id="trick_videos_list"
+             data-prototype="{{ form_widget(form.videos.vars.prototype)|e('html_attr') }}">
+            {% for row in form.videos %}
+                <div class="card item-card mb-3">
+                    <div class="card-body">
+                        {{ form_row(row) }}
+                        <div class="form--help">{{ form.vars.help }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4">
+        {{ form_row(form.category) }}
+        <div class="row">
+            <div class="col-md-6">
+                {% if trick.getImage %}
+                    <img src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage )) | imagine_filter('trick_thumb') }}"
+                         alt="{{ trick.getName }}" title="{{ trick.getName }}">
+                {% endif %}</div>
+            <div class="col-md-6">{{ form_row(form.image) }}</div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary float-right">{{ button|default('Save') }}</button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

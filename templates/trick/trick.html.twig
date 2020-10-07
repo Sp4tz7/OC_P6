@@ -1,25 +1,126 @@
 {% extends 'base.html.twig' %}
-{% block title %} trick {{ trick.getName}} {{ parent() }}{% endblock %}
-{% block body %}
-    {% if trick.getImage %}
-        <img src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage )) | imagine_filter('trick_thumb')  }}"
-             alt="{{ trick.getName }}" title="{{ trick.getName }}">
-    {% endif %}
-    {{ trick.getName }}
-    {{ trick.getDescription }}
-    {% for category in trick.getCategory %}
-        [{{ category.getName }}]
-    {% endfor %}
-    {% for video in trick.getVideos %}
-        [{{ video.url }}]
-    {% endfor %}
-     {% for image in trick.getImages %}
-        <img src="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) | imagine_filter('trick_thumb')  }}"
-             alt="{{ image.getName }}" title="{{ image.getName }}">
-    {% endfor %}
-    {% if is_granted('ROLE_USER') %}
-        {{ form(CommentForm) }}
-        {% else %}
-        Please <a href="{{ path('app_login', { 'redirect': 'show-trick', 'category': trick.getCategory.0.getSlug, 'trick': trick.getSlug }) }}">login</a> to leave a comment.
-    {% endif %}
+{% block title %} trick {{ trick.getName }} {{ parent() }}{% endblock %}
+{% block container %}
+    {% embed 'core/_modal.html.twig' with {
+        'title' : 'CONFIRMATION REQUIRED',
+        'body': 'Are you sure you want to delete this tricks?',
+        'button': 'DELETE',
+        'id': 'deleteTrick'} %}
+    {% endembed %}
+    <div class="bt-5 ">
+        <div class="container trick-container">
+            {% set main_image =  absolute_url( asset('img/home.webp')) %}
+            {% if trick.getImage %}
+                {% set main_image =  absolute_url( asset( tricks_img_url ~ trick.getImage )) %}
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="trick-admin-action">
+                    <a href="{{ path('admin-trick-edit', {'id': trick.getId }) }}">
+                        <i class="fas fa-edit"></i></a>
+                    <button type="button" class="delete_trick" data-toggle="modal"
+                            data-target="#snowtrickModal" data-id="{{ trick.getId() }}"
+                            data-csrf_token="{{ csrf_token('delete' ~ trick.id) }}">
+                        <i class="fas fa-trash"></i></a>
+                    </button>
+                </div>
+            {% endif %}
+            <img class="img-fluid" src="{{ main_image }}"
+                 alt="{{ trick.getName }}" title="{{ trick.getName }}">
+            <div class="trick-name">{{ trick.getName }}</div>
+            <div class="row mt-5">
+                {% for image in trick.getImages %}
+                    <div class="col-md-2">
+                        <a href="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) }}">
+                            <img src="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) | imagine_filter('trick_thumb') }}"
+                                 alt="{{ image.getName }}" title="{{ image.getName }}"></a>
+                    </div>
+                {% endfor %}
+                {% for video in trick.getVideos %}
+                    <div class="col-md-2">
+                        <iframe width="100%" src="{{ video.url }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 trick-description">{{ trick.getDescription }}</div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 trick-meta text-left">
+                    By <span class="text-uppercase font-weight-bold"> {{ trick.getAddedBy.getUsername }}</span>
+                    On <span class="text-uppercase">{{ trick.getDateAdd|date('d M Y, H:i a') }}</span>
+                    {% if trick.getDateEdit %}
+                        |
+                        <span>Edited at: {{ trick.getDateEdit|date('d M Y') }} by {{ trick.getEditedBy.getUsername }}</span>
+                    {% endif %}
+                    {% for category in trick.getCategory %}
+                        <a href="{{ path('category-tricks', {'category': category.getSlug}) }}"><span
+                            class="trick-category-item float-right">{{ category.getName }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h4>{{ comments|length }} {{ comments|length <= 1? 'Comment': 'Comments' }}</h4>
+                        <div class="hr-short"></div>
+                    </div>
+                    <div class="container my-5">
+                        {% if is_granted('ROLE_USER') %}
+                            {{ form_start(CommentForm) }}
+                            <div class="row mb-5 comment-form">
+                                <div class="col-md-8">
+                                    {{ form_row(CommentForm.message) }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_row(CommentForm.save) }}
+                                </div>
+                            </div>
+                            {{ form_end(CommentForm) }}
+                        {% else %}
+                            <div class="row my-5">
+                                <div class="col-12 alert alert-warning"> Please <a
+                                            href="{{ path('app_login', { 'redirect': 'show-trick', 'category': trick.getCategory.0.getSlug, 'trick': trick.getSlug }) }}">login</a>
+                                    to leave a comment.
+                                </div>
+                            </div>
+                        {% endif %}
+
+
+                        {% for comment in comments %}
+                            <div class="media mb-4 comment-box">
+                                <div class="media-left trick-comment-image">
+                                    <img class="media-object" alt="{{ comment.getAuthor.getUserName }}"
+                                         title="{{ comment.getAuthor.getUserName }}"
+                                         src="{{ absolute_url( asset( avatar_img_url ~  comment.getAuthor.getAvatar )) | imagine_filter('avatar_thumb') }}">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a href="#" class="c-font-bold">{{ comment.getAuthor.getUserName }}</a>
+                                        on <span
+                                                class="c-date text-uppercase">{{ comment.getDateAdd|date('d M. Y, H:ia') }}</span>
+                                    </h4>
+                                    {{ comment.getMessage }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% if comments %}
+                            <div class="row mt-5">
+                                <div class="col-12 text-center">
+                                    <div id="loadMoreComments">
+                                        <a href="#" class="btn btn-primary">Load More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

@@ -67,12 +67,12 @@ class Trick
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick")
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
      */
     private $images;
 
     /**
-     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="trick", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="trick", cascade={"persist"}, orphanRemoval=true)
      */
     private $videos;
 
@@ -154,12 +154,12 @@ class Trick
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage($image)
     {
         $this->image = $image;
 
@@ -190,12 +190,40 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return Collection|Image[]
-     */
     public function getImages(): Collection
     {
         return $this->images;
+    }
+
+    /**
+     * @return Trick
+     */
+    public function setImages(ArrayCollection $images)
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function addImage(Image $image)
+    {
+        $this->images[] = $image;
+        $image->setTrick($this);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function removeImage(Image $image)
+    {
+        $this->images->removeElement($image);
+
+        return $this;
     }
 
     /**
@@ -284,5 +312,10 @@ class Trick
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

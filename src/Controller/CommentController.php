@@ -31,7 +31,7 @@ class CommentController extends AbstractController
             $comment->setAuthor($this->getUser());
             $comment->setTrick($trick);
             $comment->setDateAdd(new \DateTime());
-            $comment->setMessage($data['_token']);
+            $comment->setMessage($data['message']);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);

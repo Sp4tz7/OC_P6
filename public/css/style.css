@@ -1,11 +1,307 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Roboto", sans-serif;
-  color: #f6e8e5;
-  background-color: #17171a;
+  color: #b04c2d;
+  background-color: #ffffff;
+}
+
+a, a.nav-link, .navbar-dark .navbar-nav .nav-link {
+  color: #b04c2d;
+}
+
+a.nav-link:hover {
+  background-color: #b04c2d;
+  border-radius: 4px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  font-size: 1.5em;
+  font-weight: 800;
 }
 
 h1 {
   font-family: "Exo 2", cursive;
+}
+
+h2.card-text {
+  font-size: 1.3em;
+}
+
+h4 {
+  color: #3f444a;
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+header {
+  height: 10vh;
+  background: #ffffff;
+  color: #b04c2d;
+}
+
+.btn-primary {
+  background-color: #b04c2d !important;
+  border-color: #b04c2d !important;
+}
+
+.btn-primary:hover, .btn-primary:active {
+  background-color: #ffffff !important;
+  color: #b04c2d !important;
+  border-color: #b04c2d !important;
+}
+
+.container-fluid {
+  min-height: 85vh;
+  padding: 0;
+}
+
+.main-container {
+  border-top: 2px solid #b04c2d;
+}
+
+a {
+  color: #b04c2d;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #b04c2d !important;
+  text-decoration: underline;
+}
+
+a.navbar-brand {
+  position: absolute;
+  background-color: #ffffff;
+  top: 35px;
+  padding: 0 1em;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+a.nav-link:hover {
+  color: #ffffff !important;
+}
+
+.pagination-content {
+  margin: auto;
+}
+
+.container-fluid .container {
+  max-width: 60%;
+}
+
+.home-background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 90vh;
+  background-position: center;
+  background-image: url("../img/home.webp");
+  filter: grayscale(0.4);
+}
+
+#home .box-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.home-caption {
+  max-width: 1230px;
+  color: white;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  z-index: 2;
+  transform: translate3d(-50%, -50%, 0px);
+  margin: 0px auto;
+  padding: 0px 2rem;
+  position: absolute;
+}
+
+#home h1 {
+  line-height: 1.2;
+  font-weight: 600;
+  display: block;
+  max-width: 600px;
+  margin-bottom: 10px;
+  font-size: 3.5em;
+}
+
+.link-down {
+  color: #ffffff;
+}
+
+.hr-short {
+  position: relative;
+  max-width: 70px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-right: auto;
+  border: 0;
+  border-top: 6px solid #b04c2d;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trick-container img {
+  width: 100%;
+}
+
+.trick-description {
+  padding: 2em;
+  font-size: 1.3em;
+  background-color: #b04c2d;
+  color: #ffffff;
+  width: 100%;
+}
+
+.trick-name {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  font-size: 5em;
+  font-weight: 800;
+  border-left: 5px solid;
+  padding-left: 0.5em;
+}
+
+.trick-image-item, .trick.trick-video-item {
+  max-width: 25%;
+  margin: 1.5em;
+  float: left;
+}
+
+.trick-meta {
+  padding: 1em;
+  border: 0.5px solid;
+}
+
+.trick-category-item {
+  background-color: #b04c2d;
+  color: #ffffff;
+  padding: 2px 6px 1px 6px;
+  margin: 0 2px;
+}
+
+.trick-comment {
+  border: 1px solid;
+  padding: 1em;
+  margin-top: 2em;
+  background-color: #ffece6;
+}
+
+.trick-comment-image img, .avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.trick-comment-date {
+  font-size: 0.7em;
+  float: right;
+  margin-top: 0.5em;
+}
+
+.trick-admin-action {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+}
+
+#tricks .trick-admin-action {
+  right: 0;
+  top: 113px;
+}
+
+.trick-container .trick-admin-action {
+  top: 12%;
+  right: 22%;
+}
+
+.trick-admin-action form {
+  display: inline-block;
+}
+
+.trick-admin-action a, .trick-admin-action button {
+  font-size: 1em;
+  margin: 0.5em;
+  color: #b04c2d;
+}
+
+#tricks .trick-admin-action a, .trick-admin-action button {
+  font-size: 1em;
+  margin: 0;
+  color: #b04c2d;
+}
+
+#trick-list, #trick-loader {
+  min-height: 20vh;
+}
+
+.delete_trick {
+  background: no-repeat;
+  border: none;
+}
+
+.login-container {
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.login-form {
+  max-width: 500px;
+  margin: auto;
+}
+
+.login-form input {
+  border: none;
+  border-bottom: 3px solid #aa4325;
+}
+
+.comment-box {
+  border-left: 2px solid;
+}
+
+.comment-box, .trick-box {
+  display: none;
+}
+
+.comment-form label {
+  display: none;
+}
+
+.comment-form button {
+  float: right;
+}
+
+.media-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.media-object {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px !important;
+}
+
+.media-left {
+  display: table-cell;
+  vertical-align: top;
+  padding-right: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
