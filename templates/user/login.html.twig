@@ -1,9 +1,26 @@
-{% if error %}
-    {{ error.messageKey|trans(error.messageData, 'security') }}
-{% endif %}
-<form method="post">
-    <input type="text" value="{{ last_username }}" name="username" placeholder="username" required autofocus>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    <button type="submit"> Sign in</button>
-</form>
+{% extends 'base.html.twig' %}
+{% block title %} Login | {{ parent() }}{% endblock %}
+{% block container %}
+    <div class="container login-container">
+        <h1 class="mb-5">Login</h1>
+        <form method="post" class="login-form">
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security')|raw }}
+                </div>
+            {% endif %}
+            <div class="form-group">
+                <input type="text" value="{{ last_username }}" name="username" class="form-control" placeholder="username" required
+                       autofocus>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <div class="m-3"><a href="{{ path('password-recovery') }}">Forgot password?</a></div>
+                <input type="hidden" name="_csrf_token" class="form-control" value="{{ csrf_token('authenticate') }}">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

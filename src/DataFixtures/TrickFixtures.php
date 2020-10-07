@@ -2,7 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Image;
 use App\Entity\Trick;
+use App\Entity\Video;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -21,19 +23,41 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Sad');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
-        $trick->setName('Indy ');
+        $trick->setName('Indy');
         $trick->setSlug('indy');
         $trick->setDescription('Saisie de la carre backside de la planche entre les deux pieds avec la main arrière ');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Indy');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
@@ -43,8 +67,19 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Stalefish');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
@@ -54,8 +89,19 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Tail grab');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
@@ -65,8 +111,19 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Nose grab');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
@@ -76,8 +133,19 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Japan air');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
@@ -87,8 +155,19 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Seat belt');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
@@ -98,8 +177,19 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Truck driver');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
@@ -109,8 +199,19 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::ROTATION_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('180');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $trick = new Trick();
         $date = new \DateTime();
@@ -120,8 +221,19 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
-        $trick->setImage('default_image.jpeg');
+        $trick->setImage('default_image.jpg');
         $manager->persist($trick);
+
+        $image = new Image();
+        $image->setName('Mute');
+        $image->setFileName('default_image.jpg');
+        $image->setTrick($trick);
+        $manager->persist($image);
+
+        $video = new Video();
+        $video->setTrick($trick);
+        $video->setUrl('https://www.youtube.com/embed/CflYbNXZU3Q');
+        $manager->persist($video);
 
         $manager->flush();
 

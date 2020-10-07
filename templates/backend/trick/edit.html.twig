@@ -1,0 +1,36 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Edit trick {{ parent() }}{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Modification du trick</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ path('admin') }}">Tableau de bord</a></li>
+            <li class="breadcrumb-item active">{{ trick.getName }}</li>
+        </ol>
+        <div class="row">
+            <div class="col-lg-12 col-xs-12 col-sm-12">
+                <div class="card " style="width: 100%">
+                    <div class="card-header">
+                        <h4 class="float-left">Détails du trick</h4>
+                        <ul class="nav nav-pills card-header-pills float-right">
+                            <li class="nav-item">
+                                <a class="nav-link" target="_blank"
+                                   href="{{ path('show-trick', {'category': trick.getCategory[0].getSlug, 'trick': trick.getSlug}) }}">
+                                    Voir sur le site</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                {{ include ('backend/trick/_form.html.twig', {form: form, trick: trick}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

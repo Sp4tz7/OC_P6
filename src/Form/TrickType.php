@@ -7,7 +7,6 @@ use App\Entity\TrickCategory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +21,7 @@ class TrickType extends AbstractType
             ->add('description', TextType::class)
             ->add(
                 'image',
-                FileType::class,
+                ImageType::class,
                 [
                     'required' => false,
                     'label' => 'Image principal',
@@ -41,11 +40,16 @@ class TrickType extends AbstractType
                     ],
                 ]
             )
-            ->add('images', FileType::class, [
-                'label' => 'Ajouter des images à la gallerie',
-                'multiple' => true,
-                'mapped' => false,
-                'required' => false,
+            ->add('images', CollectionType::class, [
+                'entry_type' => ImageType::class,
+                'entry_options' => [
+                    'label' => false,
+                ],
+                'label' => false,
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
             ])
             ->add('videos', CollectionType::class, [
                 'entry_type' => VideoType::class,
@@ -69,19 +73,19 @@ class TrickType extends AbstractType
                     'multiple' => true,
                 ]
             )
-            ->add('comments', CollectionType::class, [
-                'entry_type' => CommentType::class,
-                'required' => false,
-                'entry_options' => [
-                    'label' => 'Comment',
-                ],
-                'label' => false,
-                'by_reference' => false,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-            ]);
-    }
+//            ->add('comments', CollectionType::class, [
+//                'entry_type' => CommentType::class,
+//                'required' => false,
+//                'entry_options' => [
+//                    'label' => 'Comment',
+//                ],
+//                'label' => false,
+//                'by_reference' => false,
+//                'allow_add' => false,
+//                'allow_delete' => true,
+//                'prototype' => true,
+//            ])
+        ;}
 
     public function configureOptions(OptionsResolver $resolver)
     {

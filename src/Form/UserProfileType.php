@@ -38,7 +38,7 @@ class UserProfileType extends AbstractType
                     ]),
                 ],
             ])
-            ->add(
+            /*->add(
                 'roles',
                 ChoiceType::class,
                 [
@@ -52,12 +52,12 @@ class UserProfileType extends AbstractType
                     'mapped' => true,
                     'label' => 'Privilèges',
                 ]
-            )
-            ->add('is_active')
+            )*/
+//            ->add('is_active')
             ->add('Save', SubmitType::class);
 
         // Data transformer
-        $builder->get('roles')
+        /*$builder->get('roles')
             ->addModelTransformer(
                 new CallbackTransformer(
                     function ($rolesArray) {
@@ -69,7 +69,7 @@ class UserProfileType extends AbstractType
                         return [$rolesString];
                     }
                 )
-            );
+            );*/
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,9 +1,37 @@
-{% extends "base.html.twig" %}
-{% block body %}
-    {% if error|length > 0 %}
-        {% for e in error %}
-            {{ e }}
-        {% endfor %}
-    {% endif %}
-    {{ form(form) }}
+{% extends 'base.html.twig' %}
+{% block title %} Login | {{ parent() }}{% endblock %}
+{% block container %}
+    <div class="container login-container">
+        <h1 class="mb-5">Login</h1>
+        <form method="post" class="login-form">
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+            <div class="form-group">
+                {{ form_row(form.firstname) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.lastname) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.username) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.email) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.password) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.rePassword) }}
+            </div>
+            <div class="form-group">
+
+                {{ form_rest(form) }}
+            </div>
+            <div class="m-3"><a href="{{ path('home') }}">Cancel</a></div>
+        </form>
+    </div>
 {% endblock %}
