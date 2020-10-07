@@ -5,12 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserProfileType;
 use App\Form\UserRegisterType;
+use App\Manager\MailerManager;
 use App\Repository\UserRepository;
 use App\Security\LoginFormAuthenticator;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Signer\Key;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,8 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -185,7 +183,7 @@ class UserController extends AbstractController
     /**
      * @Route("/password/recovery", name="password-recovery", methods={"GET", "POST"})
      */
-    public function userPasswordRecovery(UserRepository $userRepository, Request $request, MailerInterface $mailer)
+    public function userPasswordRecovery(UserRepository $userRepository, Request $request, MailerManager $mailerManager)
     {
         $form = $this->createFormBuilder()
             ->add('email', EmailType::class)
@@ -205,16 +203,8 @@ class UserController extends AbstractController
                     ->getToken($signer, new Key($_ENV['APP_SECRET']));
                 $user->setToken($token);
                 $entityManager->flush($user);
-                $email = (new TemplatedEmail())
-                    ->from($_ENV['MAILER_FROM'])
-                    ->to(new Address($user->getEmail(), $user->getFirstname()))
-                    ->replyTo($_ENV['MAILER_REPLY_TO'])
-                    ->subject('Password recovery')
-                    ->text('You asked for a password recovery.')
-                    ->htmlTemplate('emails/password-recovery.html.twig')
-                    ->context(['user' => $user]);
 
-                $mailer->send($email);
+                $mailerManager->sendPasswordRecoveryMail($user);
             }
             $this->addFlash('success', 'Your account has been activated. Please Login!');
         }
@@ -269,29 +259,21 @@ class UserController extends AbstractController
     /**
      * @Route("/register/email-activation/{token}", name="app_resend_activation", methods={"GET"})
      */
-    public function userResendActivation(UserRepository $userRepository, Request $request, $token, MailerInterface $mailer)
-    {
+    public function userResendActivation(
+        UserRepository $userRepository,
+        Request $request,
+        $token,
+        MailerManager $mailerManager
+    ) {
         $user = $userRepository->findOneBy(['token' => $token]);
         if ($user) {
-            $email = (new TemplatedEmail())
-                ->from($_ENV['MAILER_FROM'])
-                ->to(new Address($user->getEmail(), $user->getFirstname()))
-                ->bcc($_ENV['MAILER_FROM'])
-                ->replyTo($_ENV['MAILER_REPLY_TO'])
-                ->subject('Account activation')
-                ->text('Activate your account')
-                ->htmlTemplate('emails/registration.html.twig')
-                ->context(
-                    [
-                        'user' => $user,
-                    ]
-                );
-
-            $mailer->send($email);
+            $mailerManager->sendNewActivationEmail($user);
             $this->addFlash('success', 'Email sent! Please check your email to activate your account');
+
             return $this->redirectToRoute('app_login');
         }
         $this->addFlash('error', 'Your account has not been found');
+
         return $this->redirectToRoute('app_login');
     }
 
@@ -301,7 +283,7 @@ class UserController extends AbstractController
     public function userRegister(
         Request $request,
         UserPasswordEncoderInterface $encoder,
-        MailerInterface $mailer
+        MailerManager $mailerManager
     ): Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('profile');
@@ -312,7 +294,8 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         $error = [];
 
-        if ($form->isSubmitted() && $this->validatePassword($form['password']->getData(), $form['rePassword']->getData())) {
+        if ($form->isSubmitted() && $this->validatePassword($form['password']->getData(),
+                $form['rePassword']->getData())) {
             $time = time();
             $signer = new Sha256();
             $token = (new Builder())
@@ -327,21 +310,8 @@ class UserController extends AbstractController
             $user->setPassword($encoder->encodePassword($user, $form['password']->getData()));
             $entityManager->persist($user);
             $entityManager->flush();
-            $email = (new TemplatedEmail())
-                ->from($_ENV['MAILER_FROM'])
-                ->to(new Address($user->getEmail(), $user->getFirstname()))
-                ->bcc($_ENV['MAILER_FROM'])
-                ->replyTo($_ENV['MAILER_REPLY_TO'])
-                ->subject('Your new account')
-                ->text('Congratulation, your account has been created.')
-                ->htmlTemplate('emails/registration.html.twig')
-                ->context(
-                    [
-                        'user' => $user,
-                    ]
-                );
 
-            $mailer->send($email);
+            $mailerManager->sendNewRegistrationEmail($user);
 
             $this->addFlash('success', 'Please check your email to activate your account');
 
