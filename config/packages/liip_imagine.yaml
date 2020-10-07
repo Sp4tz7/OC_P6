@@ -15,4 +15,4 @@ liip_imagine:
         trick_thumb:
             quality: 75
             filters:
-                thumbnail: { size: [300, 150], mode: outbound }
+                thumbnail: { size: [225, 112.5], mode: outbound }

@@ -83,6 +83,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
+        if (!$user->getIsActive()) {
+            $message = sprintf('Your account as not been activated.<br/> Please check your email or <a href="%s">resend email</a>',
+                $this->urlGenerator->generate('app_resend_activation', ['token' => $user->getToken()])
+            );
+            throw new CustomUserMessageAuthenticationException($message);
+        }
 
         return $user;
     }
@@ -112,6 +118,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
                 'trick' => $request->get('trick'),
             ]));
         }
+
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 

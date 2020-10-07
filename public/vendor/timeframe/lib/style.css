@@ -1,0 +1,29 @@
+#timeframe {
+    border-bottom: 5px solid;
+}
+
+.cls-1, .cls-2 {
+    fill: #decbc7;
+}
+
+.cls-2 {
+    stroke: #1b1a1e;
+}
+
+.cls-2, .cls-3 {
+    stroke-miterlimit: 10;
+}
+
+.cls-3 {
+    fill: none;
+    stroke: #decbc7;
+    stroke-width: 1.5px;
+}
+
+.timeline-event {
+    display: none;
+}
+
+.event, .project-event {
+    cursor: pointer;
+}

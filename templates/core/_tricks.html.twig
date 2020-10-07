@@ -1,0 +1,33 @@
+<div class="row">
+    {% for trick in tricks %}
+        <div class="col-md-3 my-3 trick-box" id="trick-{{ trick.getId }}">
+            <div class="card mb-4 shadow-sm">
+                <img class="card-img-top"
+                     data-src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage )) }}"
+                     alt="{{ trick.getName }}" style="height: 100px; width: 100%; display: block;"
+                     src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage )) | imagine_filter('trick_thumb') }}"
+                     data-holder-rendered="true">
+                <div class="card-body"><a
+                            href="{{ path('show-trick', {'category': trick.getCategory.0.getSlug, 'trick': trick.getSlug}) }}">
+                        <h2 class="card-text float-left">{{ trick.getName }}</h2></a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="trick-admin-action">
+                            <a href="{{ path('admin-trick-edit', {'id': trick.getId }) }}">
+                                <i class="fas fa-edit"></i></a>
+                            <button type="button" class="delete_trick" data-toggle="modal"
+                                    data-target="#snowtrickModal" data-id="{{ trick.getId() }}"
+                                    data-csrf_token="{{ csrf_token('delete' ~ trick.id) }}">
+                                <i class="fas fa-trash"></i></a>
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="col-12">
+        <div id="loadMoreTricks">
+            <a href="#" class="btn btn-primary">Load More</a>
+        </div>
+    </div>
+</div>

@@ -21,15 +21,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class UserController.
  */
 class UserController extends AbstractController
 {
+    /**
+     * @Route("/admin/users", name="admin-user-list")
+     */
+    public function index(UserRepository $userRepository)
+    {
+        return $this->render('backend/user/list.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+
     /**
      * @Route("/login", name="app_login")
      */
@@ -179,7 +189,7 @@ class UserController extends AbstractController
     {
         $form = $this->createFormBuilder()
             ->add('email', EmailType::class)
-            ->add('Reset', SubmitType::class)
+            ->add('submit', SubmitType::class, ['label' => 'Reset your password'])
             ->getForm();
 
         $form->handleRequest($request);
@@ -257,7 +267,36 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="register", methods={"GET", "POST"})
+     * @Route("/register/email-activation/{token}", name="app_resend_activation", methods={"GET"})
+     */
+    public function userResendActivation(UserRepository $userRepository, Request $request, $token, MailerInterface $mailer)
+    {
+        $user = $userRepository->findOneBy(['token' => $token]);
+        if ($user) {
+            $email = (new TemplatedEmail())
+                ->from($_ENV['MAILER_FROM'])
+                ->to(new Address($user->getEmail(), $user->getFirstname()))
+                ->bcc($_ENV['MAILER_FROM'])
+                ->replyTo($_ENV['MAILER_REPLY_TO'])
+                ->subject('Account activation')
+                ->text('Activate your account')
+                ->htmlTemplate('emails/registration.html.twig')
+                ->context(
+                    [
+                        'user' => $user,
+                    ]
+                );
+
+            $mailer->send($email);
+            $this->addFlash('success', 'Email sent! Please check your email to activate your account');
+            return $this->redirectToRoute('app_login');
+        }
+        $this->addFlash('error', 'Your account has not been found');
+        return $this->redirectToRoute('app_login');
+    }
+
+    /**
+     * @Route("/register", name="app_register", methods={"GET", "POST"})
      */
     public function userRegister(
         Request $request,
@@ -273,9 +312,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         $error = [];
 
-        if ($form->isSubmitted()) {
-            $this->validatePassword($form['password']->getData(), $form['rePassword']->getData());
-
+        if ($form->isSubmitted() && $this->validatePassword($form['password']->getData(), $form['rePassword']->getData())) {
             $time = time();
             $signer = new Sha256();
             $token = (new Builder())
@@ -305,6 +342,8 @@ class UserController extends AbstractController
                 );
 
             $mailer->send($email);
+
+            $this->addFlash('success', 'Please check your email to activate your account');
 
             return $this->redirectToRoute('app_login');
         }

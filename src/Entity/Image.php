@@ -49,12 +49,12 @@ class Image
         return $this;
     }
 
-    public function getFileName(): ?string
+    public function getFileName()
     {
         return $this->file_name;
     }
 
-    public function setFileName(string $file_name): self
+    public function setFileName($file_name): self
     {
         $this->file_name = $file_name;
 

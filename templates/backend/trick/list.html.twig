@@ -1,0 +1,86 @@
+{% extends 'admin-base.html.twig' %}
+{% block title %} tricks {{ parent() }}{% endblock %}
+{% block main %}
+    {% embed 'core/_modal.html.twig' with {
+        'title' : 'CONFIRMATION REQUIRED',
+        'body': 'Are you sure you want to delete this tricks?',
+        'button': 'DELETE',
+        'id': 'deleteTrick'} %}
+    {% endembed %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Liste des tricks</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ path('admin') }}">Tableau de bord</a></li>
+            <li class="breadcrumb-item active">Liste des tricks</li>
+        </ol>
+        <div class="row" id="tricks">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Liste de tous les tricks
+                        <a class="btn btn-outline-info float-right" href="{{ path('admin-trick-add') }}">Ajouter</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr class="font-weight-bold">
+                                    <td>Image</td>
+                                    <td>Nom</td>
+                                    <td>Catégorie</td>
+                                    <td>Commentaires</td>
+                                    <td>Créé par</td>
+                                    <td>Créé le</td>
+                                    <td>Action</td>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr class="font-weight-bold">
+                                    <td>Image</td>
+                                    <td>Nom</td>
+                                    <td>Catégorie</td>
+                                    <td>Commentaires</td>
+                                    <td>Créé par</td>
+                                    <td>Créé le</td>
+                                    <td>Action</td>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                {% for trick in tricks %}
+                                    <tr id="trick-{{ trick.getId }}">
+                                        <td>{% if trick.getImage %}
+                                                <img src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage )) | imagine_filter('trick_thumb')  }}"
+                                                     alt="{{ trick.getName }}" width="150">
+                                            {% endif %}</td>
+                                        <td>{{ trick.getName }}</td>
+                                        <td>{% for category in trick.getCategory %}
+                                                {{ category.getName }}
+                                            {% endfor %}</td>
+                                        <td>{{ trick.getAddedBy.getFirstname }}</td>
+                                        <td>{{ trick.getComments|length }}</td>
+                                        <td>{{ trick.getDateAdd|date('d.m.Y') }}</td>
+                                        <td>
+                                            <div class="trick-admin-action">
+                                                <a href="{{ path('admin-trick-edit', {'id': trick.getId }) }}">
+                                                    <i class="fas fa-edit"></i></a>
+                                                <button type="button" class="delete_trick" data-toggle="modal"
+                                                        data-target="#snowtrickModal" data-id="{{ trick.getId() }}"
+                                                        data-csrf_token="{{ csrf_token('delete' ~ trick.id) }}">
+                                                    <i class="fas fa-trash"></i></a>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_script %}caca
+    {{ parent() }}
+    <script src="{{ absolute_url( asset('/js/trick.js')) }}"></script>
+{% endblock %}
