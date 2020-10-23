@@ -23,7 +23,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/admin/trick/add", name="admin-trick-add")
      */
-    public function trickAdd(Request $request, SlugManager $slugManager, Filesystem $filesystem)
+    public function trickAdd(Request $request, SlugManager $slugManager)
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
@@ -203,12 +203,12 @@ class TrickController extends AbstractController
      */
     public function list(
         TrickRepository $trickRepository,
-        TrickCategoryRepository $trickCategoryRepository
+        TrickCatRepository $trickCatRepository
     ) {
         return $this->render(
             'trick/list.html.twig',
             [
-                'categories' => $trickCategoryRepository->findAll(),
+                'categories' => $trickCatRepository->findAll(),
                 'tricks' => $trickRepository->findBy([], ['date_add' => 'DESC']),
             ]);
     }
@@ -243,9 +243,9 @@ class TrickController extends AbstractController
     /**
      * @Route("/tricks/{category}", name="category-tricks")
      */
-    public function showTricksCategory(TrickCategoryRepository $trickCategoryRepository, $category)
+    public function showTricksCat(TrickCatRepository $trickCatRepository, $category)
     {
-        $category = $trickCategoryRepository->findOneBy(['slug' => $category]);
+        $category = $trickCatRepository->findOneBy(['slug' => $category]);
         if (!$category) {
             throw $this->createNotFoundException('This category does not exists');
         }

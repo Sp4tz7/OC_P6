@@ -261,7 +261,6 @@ class UserController extends AbstractController
      */
     public function userResendActivation(
         UserRepository $userRepository,
-        Request $request,
         $token,
         MailerManager $mailerManager
     ) {
