@@ -198,6 +198,7 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
+  width: 100%;
 }
 
 svg {
@@ -224,6 +225,7 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 button {
@@ -2549,6 +2551,7 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #17a2b8;
   border-color: #17a2b8;
+  max-height: 2.5em;
 }
 .btn-info:hover {
   color: #fff;
@@ -10300,4 +10303,8 @@ pre {
 }
 .trick-admin-action a:hover, .trick-admin-action button:hover{
   color: #4CAF50;
+}
+
+.button-holder {
+  width: 100%;
 }

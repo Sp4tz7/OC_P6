@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\Image;
 use App\Entity\Trick;
 use App\Form\CommentType;
 use App\Form\TrickType;
@@ -11,6 +10,7 @@ use App\Repository\CommentRepository;
 use App\Repository\TrickCategoryRepository;
 use App\Repository\TrickRepository;
 use App\Service\SlugManager;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
@@ -44,16 +44,28 @@ class TrickController extends AbstractController
             }
 
             $entityManager->persist($trick);
+
+            $images = $form->getData()->getImages()->toArray();
+            foreach ($images as $image) {
+                $file = $image->getFileName();
+                if ($file) {
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move($imageDirectory, $fileName);
+                    $image->setName($trick->getName());
+                    $image->setFileName($fileName);
+                }
+                $trick->addImage($image);
+            }
+
             $entityManager->flush();
 
-            $trick = new Trick();
-            $form = $this->createForm(TrickType::class, $trick);
-
             $this->addFlash('success', 'New trick has been added');
+
+            return $this->redirectToRoute('admin-trick-list');
         }
 
         return $this->render(
-            'trick/new.html.twig',
+            'backend/trick/new.html.twig',
             [
                 'controller_name' => 'TrickController',
                 'form' => $form->createView(),
@@ -103,17 +115,24 @@ class TrickController extends AbstractController
 
         $imageDirectory = $this->getParameter('tricks_img_directory');
 
-        $trick->setImage(new File(
-            $imageDirectory.'/'.$trick->getImage()
-        ));
         foreach ($trick->getImages() as $img) {
             $img->setFilename(new File(
-                $imageDirectory.'/'.$img->getFileName()
+                $imageDirectory.'/'.$img->getFileName(), false
             ));
         }
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+
+        $originalVideo = new ArrayCollection();
+        foreach ($trick->getVideos() as $video) {
+            $originalVideo->add($video);
+        }
+
+        $originalImage = new ArrayCollection();
+        foreach ($trick->getImages() as $image) {
+            $originalImage->add($image);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -122,41 +141,39 @@ class TrickController extends AbstractController
             $trick->setEditedBy($this->getUser());
 
             $imageFile = $form['image']->getData();
+            $imageDirectory = $this->getParameter('tricks_img_directory');
 
             if ($imageFile) {
                 $filename = md5(uniqid()).'.'.$imageFile->guessExtension();
                 $imageFile->move($imageDirectory, $filename);
-
-                $oldImage = $imageDirectory.'/'.$trick->getImage();
-                if ($oldImage) {
-                    $filesystem->remove($imageDirectory.'/'.$oldImage);
-                }
-
                 $trick->setImage($filename);
             }
 
-            $imagesFile = $form['images']->getData();
-            if ($imagesFile) {
-                foreach ($imagesFile as $imageFile) {
-                    var_dump($imageFile);
-                    die();
-                    $filename = md5(uniqid()).'.'.$imageFile->guessExtension();
-                    $imageFile->move($imageDirectory, $filename);
+            $entityManager->persist($trick);
 
-                    $image = new Image();
-                    $image->setName($filename);
-                    $image->setFileName($filename);
-                    $image->setTrick($trick);
-                    $entityManager->persist($image);
-                    $entityManager->flush();
-                    $trick->addImages($image);
+            $images = $form->getData()->getImages()->toArray();
+
+            foreach ($images as $image) {
+                $file = $image->getFileName();
+                if ($file) {
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move($imageDirectory, $fileName);
+                    $image->setFileName($fileName);
+                }
+                $trick->addImage($image);
+            }
+
+            foreach ($trick->getImages() as $image) {
+                if (!$image->getFileName()) {
+                    $trick->removeImage($image);
                 }
             }
 
-            $entityManager->persist($trick);
             $entityManager->flush();
 
             $this->addFlash('success', 'Trick has been edited');
+
+            return $this->redirectToRoute('admin-trick-list');
         }
 
         return $this->render(

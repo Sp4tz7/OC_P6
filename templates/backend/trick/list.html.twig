@@ -8,16 +8,16 @@
         'id': 'deleteTrick'} %}
     {% endembed %}
     <div class="container-fluid">
-        <h1 class="mt-4">Liste des tricks</h1>
+        <h1 class="mt-4">Tricks</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="{{ path('admin') }}">Tableau de bord</a></li>
-            <li class="breadcrumb-item active">Liste des tricks</li>
+            <li class="breadcrumb-item"><a href="{{ path('admin') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Trick list</li>
         </ol>
         <div class="row" id="tricks">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-table mr-1"></i>Liste de tous les tricks
-                        <a class="btn btn-outline-info float-right" href="{{ path('admin-trick-add') }}">Ajouter</a>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Trick list
+                        <a class="btn btn-outline-info float-right" href="{{ path('admin-trick-add') }}">ADD NEW TRICK</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -25,22 +25,22 @@
                                 <thead>
                                 <tr class="font-weight-bold">
                                     <td>Image</td>
-                                    <td>Nom</td>
-                                    <td>Catégorie</td>
-                                    <td>Commentaires</td>
-                                    <td>Créé par</td>
-                                    <td>Créé le</td>
+                                    <td>Name</td>
+                                    <td>Category</td>
+                                    <td>Comments</td>
+                                    <td>Add by</td>
+                                    <td>Date</td>
                                     <td>Action</td>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr class="font-weight-bold">
                                     <td>Image</td>
-                                    <td>Nom</td>
-                                    <td>Catégorie</td>
-                                    <td>Commentaires</td>
-                                    <td>Créé par</td>
-                                    <td>Créé le</td>
+                                    <td>Name</td>
+                                    <td>Category</td>
+                                    <td>Comments</td>
+                                    <td>Add by</td>
+                                    <td>Date</td>
                                     <td>Action</td>
                                 </tr>
                                 </tfoot>
@@ -80,7 +80,8 @@
         </div>
     </div>
 {% endblock %}
-{% block custom_script %}caca
+{% block custom_script %}
     {{ parent() }}
     <script src="{{ absolute_url( asset('/js/trick.js')) }}"></script>
+    <script>Trick.init();</script>
 {% endblock %}

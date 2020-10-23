@@ -7,6 +7,8 @@ use App\Entity\TrickCategory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,28 +20,24 @@ class TrickType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('description', TextType::class)
-            ->add(
-                'image',
-                ImageType::class,
-                [
-                    'required' => false,
-                    'label' => 'Image principal',
-                    'mapped' => false,
-                    'constraints' => [
-                        new File(
-                            [
-                                'mimeTypes' => [
-                                    'image/png',
-                                    'image/jpg',
-                                    'image/jpeg',
-                                ],
-                                'mimeTypesMessage' => 'Le fichier doit etre de type jpeg ou png',
-                            ]
-                        ),
-                    ],
-                ]
-            )
+            ->add('description', TextareaType::class, [
+                'attr' => ['rows' => 9]
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'Main image',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpg',
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Please upload jpeg or png',
+                    ]),
+                ],
+            ])
             ->add('images', CollectionType::class, [
                 'entry_type' => ImageType::class,
                 'entry_options' => [
@@ -55,7 +53,7 @@ class TrickType extends AbstractType
                 'entry_type' => VideoType::class,
                 'required' => false,
                 'entry_options' => [
-                    'label' => 'Video url',
+                    'label' => false,
                 ],
                 'label' => false,
                 'by_reference' => false,
@@ -68,7 +66,7 @@ class TrickType extends AbstractType
                 EntityType::class,
                 [
                     'choice_label' => 'name',
-                    'label' => 'Catégorie',
+                    'label' => 'Trick category',
                     'class' => TrickCategory::class,
                     'multiple' => true,
                 ]
@@ -85,13 +83,15 @@ class TrickType extends AbstractType
 //                'allow_delete' => true,
 //                'prototype' => true,
 //            ])
-        ;}
+        ;
+    }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             [
                 'data_class' => Trick::class,
+                'validation_groups' => ['new_trick'],
             ]
         );
     }

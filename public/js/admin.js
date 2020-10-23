@@ -23,9 +23,7 @@ var Admin = function () {
             // Toggle the side navigation
             $("[data-delete]").on("click", function (e) {
                 e.preventDefault();
-                // On demande confirmation
-                if (confirm("Voulez-vous supprimer cette image ?")) {
-                    // On envoie une requête Ajax vers le href du lien avec la méthode DELETE
+                if (confirm("Do you want to delete this image?")) {
                     fetch(this.getAttribute("href"), {
                         method: "DELETE",
                         headers: {
@@ -51,7 +49,7 @@ var Admin = function () {
             $("[data-delete-all]").on("click", function (e) {
                 e.preventDefault();
                 // On demande confirmation
-                if (confirm("Voulez-vous supprimer toutes les images de ce portfolio?")) {
+                if (confirm("Dou you want to delete all images?")) {
                     // On envoie une requête Ajax vers le href du lien avec la méthode DELETE
                     fetch(this.getAttribute("href"), {
                         method: "DELETE",
@@ -66,7 +64,7 @@ var Admin = function () {
                     ).then(data => {
                         if (data.success) {
                             $(".portfolio-image").remove();
-                            Command: toastr.success("Image(s) supprimée(s)", "Confirmation");
+                            Command: toastr.success("Images deleted", "Confirmation");
                         } else {
                             alert(data.error)
                         }
@@ -77,8 +75,8 @@ var Admin = function () {
             var $collectionImg;
             var $collectionVideo;
 
-            var $addNewImg = $('<button type="button" class="btn btn-info">Ajouter une image</button>');
-            var $addVideoButton = $('<button type="button" class="btn btn-info">Ajouter une video</button>');
+            var $addNewImg = $('<div class="button-holder"><button type="button" class="btn btn-info">Add an image</button></div>');
+            var $addVideoButton = $('<div class="button-holder"><button type="button" class="btn btn-info">Add a video</button></div>');
 
             //get the collectionImg
             $collectionImg = $('#trick_images_list');
@@ -123,7 +121,7 @@ var Admin = function () {
 
             function addRemoveButton($panel) {
                 // create remove button
-                var $removeButton = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+                var $removeButton = $('<a href="#" class="btn btn-danger">Delete</a>');
                 // card footer
                 var $cardFooter = $('<div class="card-footer"></div>').append($removeButton);
 
@@ -153,13 +151,13 @@ var Admin = function () {
                 $collectionImg.data('index', index + 1);
 
                 // create the card
-                var $card = $('<div class="card mb-3"></div>');
+                var $card = $('<div class="card item-card col-md-5 m-3"></div>');
                 //create heading card
                 // var $cardheading = $('<div class="card-heading"><img id="blah" src="#" alt="your image" class="img-fluid mb-3" style="max-height: 300px"/></div>');
                 // append cardheading in card
                 // $card.append($cardheading);
                 //create the panel-body and append the form to it
-                var $cardBody = $('<div class="card-body"><div class="card-heading"><img id="blah" src="#" alt="your image" class="img-fluid mb-3" style="max-height: 300px"/></div></div>').append(newForm);
+                var $cardBody = $('<div class="card-body"><div class="card-heading"><img id="blah" src="#" alt="" class="img-fluid mb-3" style="max-height: 300px"/></div></div>').append(newForm);
                 // append the body to the card
                 $card.append($cardBody);
                 // append the removebutton to the new panel

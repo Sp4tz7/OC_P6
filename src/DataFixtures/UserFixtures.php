@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
@@ -41,18 +41,18 @@ class UserFixtures extends Fixture
         $adminUser->setFirstname('Janne');
         $adminUser->setLastname('Doe');
         $adminUser->setIsActive(true);
-        $adminUser->setAvatar('default_avatar.png');
+        $adminUser->setAvatar('default_avatar_2.png');
         $manager->persist($adminUser);
 
         $user = new User();
         $user->setUsername('User');
-        $user->setEmail('danald.doe@example.com');
+        $user->setEmail('donald.doe@example.com');
         $user->setPassword($this->encoder->encodePassword($user, 'user123456789'));
         $user->setRoles(['USER']);
         $user->setFirstname('John');
         $user->setLastname('Doe');
         $user->setIsActive(true);
-        $user->setAvatar('default_avatar.png');
+        $user->setAvatar('default_avatar_3.png');
         $manager->persist($user);
 
         $manager->flush();

@@ -83,11 +83,13 @@ a:hover {
 
 a.navbar-brand {
   position: absolute;
-  background-color: $primary-color;
-  top: 35px;
+  top: 40px;
   padding: 0 1em;
   border-radius: 4px;
   z-index: 1;
+}
+a.navbar-brand img {
+  width: 100%;
 }
 
 a.nav-link:hover {

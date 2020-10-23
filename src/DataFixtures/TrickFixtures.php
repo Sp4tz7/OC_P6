@@ -7,7 +7,7 @@ use App\Entity\Trick;
 use App\Entity\Video;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class TrickFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -17,9 +17,9 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
     {
         $trick = new Trick();
         $date = new \DateTime();
-        $trick->setName('Sad');
-        $trick->setSlug('sad');
-        $trick->setDescription('Saisie de la carre frontside de la planche, entre les deux pieds, avec la main arrière');
+        $trick->setName('Ollie');
+        $trick->setSlug('ollie');
+        $trick->setDescription('A trick in which the snowboarder springs off the tail of the board and into the air.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -27,7 +27,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($trick);
 
         $image = new Image();
-        $image->setName('Sad');
+        $image->setName('Ollie');
         $image->setFileName('default_image.jpg');
         $image->setTrick($trick);
         $manager->persist($image);
@@ -39,9 +39,9 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
         $trick = new Trick();
         $date = new \DateTime();
-        $trick->setName('Indy');
-        $trick->setSlug('indy');
-        $trick->setDescription('Saisie de la carre backside de la planche entre les deux pieds avec la main arrière ');
+        $trick->setName('Nollie');
+        $trick->setSlug('nollie');
+        $trick->setDescription('A trick in which the snowboarder springs off the nose of the board and into the air.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -49,7 +49,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($trick);
 
         $image = new Image();
-        $image->setName('Indy');
+        $image->setName('Nollie');
         $image->setFileName('default_image.jpg');
         $image->setTrick($trick);
         $manager->persist($image);
@@ -61,9 +61,9 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
         $trick = new Trick();
         $date = new \DateTime();
-        $trick->setName('Stalefish');
-        $trick->setSlug('stalefish');
-        $trick->setDescription('Saisie de la carre backside de la planche entre les deux pieds avec la main arrière ');
+        $trick->setName('Switch ollie');
+        $trick->setSlug('switch-ollie');
+        $trick->setDescription('While riding switch, the snowboarder performs an ollie.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -71,7 +71,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($trick);
 
         $image = new Image();
-        $image->setName('Stalefish');
+        $image->setName('Switch ollie');
         $image->setFileName('default_image.jpg');
         $image->setTrick($trick);
         $manager->persist($image);
@@ -85,7 +85,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $date = new \DateTime();
         $trick->setName('Tail grab');
         $trick->setSlug('tail-grab');
-        $trick->setDescription('Saisie de la partie arrière de la planche, avec la main arrière');
+        $trick->setDescription('The rear hand grabs the tail of the snowboard. Variations include straightening, or boning the front leg, or tweaking the board slightly frontside or backside.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -107,7 +107,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $date = new \DateTime();
         $trick->setName('Nose grab');
         $trick->setSlug('nose-grab');
-        $trick->setDescription('Saisie de la partie avant de la planche, avec la main avant');
+        $trick->setDescription('The front hand grabs the nose of the snowboard.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -129,7 +129,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $date = new \DateTime();
         $trick->setName('Japan air');
         $trick->setSlug('japan-air');
-        $trick->setDescription('Saisie de l\'avant de la planche, avec la main avant, du côté de la carre frontside');
+        $trick->setDescription('The front hand grabs the toe edge in between the feet and the front knee is pulled to the board.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -149,9 +149,9 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
         $trick = new Trick();
         $date = new \DateTime();
-        $trick->setName('Seat belt');
-        $trick->setSlug('seat-belt');
-        $trick->setDescription('Saisie du carre frontside à l\'arrière avec la main avante');
+        $trick->setName('Seatbelt');
+        $trick->setSlug('seatbelt');
+        $trick->setDescription('The front hand reaches across the body and grabs the tail while the front leg is boned. The snowboarders\'s arm resembles the sash of a three-point seatbelt, hence the name.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -159,7 +159,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($trick);
 
         $image = new Image();
-        $image->setName('Seat belt');
+        $image->setName('Seatbelt');
         $image->setFileName('default_image.jpg');
         $image->setTrick($trick);
         $manager->persist($image);
@@ -173,7 +173,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $date = new \DateTime();
         $trick->setName('Truck driver');
         $trick->setSlug('truck-driver');
-        $trick->setDescription('Saisie du carre avant et carre arrière avec chaque main (comme tenir un volant de voiture');
+        $trick->setDescription('When both hands grab Indy and Melon.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -193,9 +193,9 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
         $trick = new Trick();
         $date = new \DateTime();
-        $trick->setName('180');
-        $trick->setSlug('180');
-        $trick->setDescription('Un 180 désigne un demi-tour, soit 180 degrés d\'angle');
+        $trick->setName('Crippler');
+        $trick->setSlug('crippler');
+        $trick->setDescription('An inverted 540 degree spin performed on the frontside wall of the halfpipe');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::ROTATION_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
@@ -203,7 +203,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($trick);
 
         $image = new Image();
-        $image->setName('180');
+        $image->setName('Crippler');
         $image->setFileName('default_image.jpg');
         $image->setTrick($trick);
         $manager->persist($image);
@@ -217,7 +217,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $date = new \DateTime();
         $trick->setName('Mute');
         $trick->setSlug('mute');
-        $trick->setDescription('Saisie de la carre frontside de la planche entre les deux pieds avec la main avant');
+        $trick->setDescription('The front hand grabs the toe edge either between the toes or in front of the front foot.');
         $trick->setAddedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
         $trick->addCategory($this->getReference(TrickCategoryFixtures::GRAB_CATEGORY_REFERENCE));
         $trick->setDateAdd($date);
