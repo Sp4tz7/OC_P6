@@ -32,8 +32,7 @@ var Admin = function () {
                         },
                         body: JSON.stringify({"_token": this.dataset.token})
                     }).then(
-                        // On récupère la réponse en JSON
-                        response => response.json()
+                        (response) => response.json()
                     ).then(data => {
                         if (data.success) {
                             $(this).parent('div').remove();
@@ -41,7 +40,7 @@ var Admin = function () {
                         } else {
                             alert(data.error)
                         }
-                    }).catch(e => alert(e))
+                    }).catch((e) => alert(e))
                 }
             });
 
@@ -91,24 +90,24 @@ var Admin = function () {
 
             function addNewFormVideo() {
                 //getting the prototype
-                var prototype = $collectionVideo.data('prototype');
+                var prototype = $collectionVideo.data("prototype");
                 // get index
-                var index = $collectionVideo.data('index');
+                var index = $collectionVideo.data("index");
                 // create the form
                 var newForm = prototype;
 
                 newForm = newForm.replace(/__name__/g, index);
 
-                $collectionVideo.data('index', index + 1);
+                $collectionVideo.data("index", index + 1);
 
                 // create the card
-                var $card = $('<div class="card video-card mb-3"></div>');
+                var $card = $("<div class=\"card video-card mb-3\"></div>");
                 //create heading card
                 // var $cardheading = $('<div class="card-heading"><img id="blah" src="#" alt="your image" class="img-fluid mb-3" style="max-height: 300px"/></div>');
                 // append cardheading in card
                 // $card.append($cardheading);
                 //create the panel-body and append the form to it
-                var $cardBody = $('<div class="card-body video-card"></div>').append(newForm);
+                var $cardBody = $("<div class=\"card-body video-card\"></div>").append(newForm);
                 // append the body to the card
                 $card.append($cardBody);
                 // append the removebutton to the new panel
@@ -121,15 +120,15 @@ var Admin = function () {
 
             function addRemoveButton($panel) {
                 // create remove button
-                var $removeButton = $('<a href="#" class="btn btn-danger">Delete</a>');
+                var $removeButton = $("<a href=\"#\" class=\"btn btn-danger\">Delete</a>");
                 // card footer
-                var $cardFooter = $('<div class="card-footer"></div>').append($removeButton);
+                var $cardFooter = $("<div class=\"card-footer\"></div>").append($removeButton);
 
                 // handle the click event of the remove button
 
                 $removeButton.click(function (e) {
                     e.preventDefault();
-                    $(e.target).parents('.item-card').slideUp(1000, function () {
+                    $(e.target).parents(".item-card").slideUp(1000, function () {
                         $(this).remove();
                     });
                 });
@@ -140,24 +139,24 @@ var Admin = function () {
 
             function addNewFormImg() {
                 //getting the prototype
-                var prototype = $collectionImg.data('prototype');
+                var prototype = $collectionImg.data("prototype");
                 // get index
-                var index = $collectionImg.data('index');
+                var index = $collectionImg.data("index");
                 // create the form
                 var newForm = prototype;
 
                 newForm = newForm.replace(/__name__/g, index);
 
-                $collectionImg.data('index', index + 1);
+                $collectionImg.data("index", index + 1);
 
                 // create the card
-                var $card = $('<div class="card item-card col-md-5 m-3"></div>');
+                var $card = $("<div class=\"card item-card col-md-5 m-3\"></div>");
                 //create heading card
                 // var $cardheading = $('<div class="card-heading"><img id="blah" src="#" alt="your image" class="img-fluid mb-3" style="max-height: 300px"/></div>');
                 // append cardheading in card
                 // $card.append($cardheading);
                 //create the panel-body and append the form to it
-                var $cardBody = $('<div class="card-body"><div class="card-heading"><img id="blah" src="#" alt="" class="img-fluid mb-3" style="max-height: 300px"/></div></div>').append(newForm);
+                var $cardBody = $("<div class=\"card-body\"><div class=\"card-heading\"><img id=\"blah\" src=\"#\" alt=\"\" class=\"img-fluid mb-3\" style=\"max-height: 300px\"/></div></div>").append(newForm);
                 // append the body to the card
                 $card.append($cardBody);
                 // append the removebutton to the new panel
@@ -168,11 +167,11 @@ var Admin = function () {
             }
 
 // add remove button to existing items
-            $collectionImg.find('.card').each(function () {
+            $collectionImg.find(".card").each(function () {
                 addRemoveButton($(this));
             });
 
-            $collectionVideo.find('fieldset').each(function () {
+            $collectionVideo.find("fieldset").each(function () {
                 addRemoveButton($(this));
             });
 

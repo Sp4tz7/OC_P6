@@ -1,6 +1,6 @@
 $primary-font: 'Roboto', sans-serif;
 $secondary-font: 'Exo 2', cursive;
-$primary-color: #ffffff;
+$primary-color: #fff;
 $secondary-color: #b04c2d;
 $orange-color: #F7882F;
 $citrus-color: #F7C331;
@@ -16,12 +16,14 @@ body {
   background-color: $primary-color;
 }
 
-a, a.nav-link, .navbar-dark .navbar-nav .nav-link {
+a,
+a.nav-link,
+.navbar-dark .navbar-nav .nav-link {
   color: $secondary-color;
 }
 
 a.nav-link:hover {
-  background-color: $secondary-color;
+  color: $primary-color !important;
   border-radius: 4px;
 }
 
@@ -56,7 +58,8 @@ header {
   border-color: $secondary-color !important;
 }
 
-.btn-primary:hover, .btn-primary:active {
+.btn-primary:hover,
+.btn-primary:active {
   background-color: $primary-color !important;
   color: $secondary-color !important;
   border-color: $secondary-color !important;
@@ -88,12 +91,9 @@ a.navbar-brand {
   border-radius: 4px;
   z-index: 1;
 }
+
 a.navbar-brand img {
   width: 100%;
-}
-
-a.nav-link:hover {
-  color: $primary-color !important;
 }
 
 .pagination-content {
@@ -131,9 +131,9 @@ a.nav-link:hover {
   left: 50%;
   width: 100%;
   z-index: 2;
-  transform: translate3d(-50%, -50%, 0px);
-  margin: 0px auto;
-  padding: 0px 2rem;
+  transform: translate3d(-50%, -50%, 0);
+  margin: 0 auto;
+  padding: 0 2rem;
   position: absolute;
 }
 
@@ -147,20 +147,16 @@ a.nav-link:hover {
 }
 
 .link-down {
-  color: #ffffff;
+  color: #fff;
 }
 
 .hr-short {
   position: relative;
   max-width: 70px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  margin-right: auto;
   border: 0;
   border-top: 6px solid $secondary-color;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto 30px;
 }
 
 .trick-container img {
@@ -188,7 +184,8 @@ a.nav-link:hover {
 .trick-images {
 }
 
-.trick-image-item, .trick.trick-video-item {
+.trick-image-item,
+.trick.trick-video-item {
   max-width: 25%;
   margin: 1.5em;
   float: left;
@@ -196,7 +193,7 @@ a.nav-link:hover {
 
 .trick-meta {
   padding: 1em;
-  border: .5px solid;
+  border: 0.5px solid;
 }
 
 .trick-category-item {
@@ -214,7 +211,8 @@ a.nav-link:hover {
 }
 
 
-.trick-comment-image img, .avatar {
+.trick-comment-image img,
+.avatar {
   vertical-align: middle;
   width: 50px;
   height: 50px;
@@ -224,7 +222,7 @@ a.nav-link:hover {
 .trick-comment-date {
   font-size: 0.7em;
   float: right;
-  margin-top: .5em;
+  margin-top: 0.5em;
 }
 
 .trick-admin-action {
@@ -247,19 +245,23 @@ a.nav-link:hover {
   display: inline-block;
 }
 
-.trick-admin-action a, .trick-admin-action button {
+.trick-admin-action a,
+.trick-admin-action button {
   font-size: 1em;
-  margin: .5em;
+  margin: 0.5em;
   color: $secondary-color;
 }
 
-#tricks .trick-admin-action a, .trick-admin-action button {
+
+#tricks .trick-admin-action a,
+.trick-admin-action button {
   font-size: 1em;
   margin: 0;
   color: $secondary-color;
 }
 
-#trick-list, #trick-loader {
+#trick-list,
+#trick-loader {
   min-height: 20vh;
 }
 
@@ -291,13 +293,16 @@ a.nav-link:hover {
 .comment-box {
   border-left: 2px solid;
 }
-.comment-box, .trick-box {
+
+.comment-box,
+.trick-box {
   display: none;
 }
 
-.comment-form label{
+.comment-form label {
   display: none;
 }
+
 .comment-form button {
   float: right;
 }
@@ -312,7 +317,6 @@ a.nav-link:hover {
   width: 50px;
   border-radius: 50px !important;
 }
-
 
 .media-left {
   display: table-cell;
