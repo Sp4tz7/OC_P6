@@ -103,7 +103,6 @@ class TrickController extends AbstractController
     public function trickEdit(
         Request $request,
         SlugManager $slugManager,
-        Filesystem $filesystem,
         TrickRepository $trickRepository,
         $id
     ) {
