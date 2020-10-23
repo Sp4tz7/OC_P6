@@ -76,7 +76,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/admin/trick/delete/{id}/{token}/", name="admin-trick-delete", methods="DELETE")
      */
-    public function trickDelete(Request $request, TrickRepository $trickRepository, Filesystem $filesystem, $id, $token)
+    public function trickDelete(TrickRepository $trickRepository, Filesystem $filesystem, $id, $token)
     {
         $em = $this->getDoctrine()->getManager();
 
