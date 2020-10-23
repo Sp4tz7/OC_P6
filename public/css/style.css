@@ -5,15 +5,17 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   color: #b04c2d;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
-a, a.nav-link, .navbar-dark .navbar-nav .nav-link {
+a,
+a.nav-link,
+.navbar-dark .navbar-nav .nav-link {
   color: #b04c2d;
 }
 
 a.nav-link:hover {
-  background-color: #b04c2d;
+  color: #fff !important;
   border-radius: 4px;
 }
 
@@ -38,7 +40,7 @@ h4 {
 
 header {
   height: 10vh;
-  background: #ffffff;
+  background: #fff;
   color: #b04c2d;
 }
 
@@ -47,8 +49,9 @@ header {
   border-color: #b04c2d !important;
 }
 
-.btn-primary:hover, .btn-primary:active {
-  background-color: #ffffff !important;
+.btn-primary:hover,
+.btn-primary:active {
+  background-color: #fff !important;
   color: #b04c2d !important;
   border-color: #b04c2d !important;
 }
@@ -84,10 +87,6 @@ a.navbar-brand img {
   width: 100%;
 }
 
-a.nav-link:hover {
-  color: #ffffff !important;
-}
-
 .pagination-content {
   margin: auto;
 }
@@ -121,9 +120,9 @@ a.nav-link:hover {
   left: 50%;
   width: 100%;
   z-index: 2;
-  transform: translate3d(-50%, -50%, 0px);
-  margin: 0px auto;
-  padding: 0px 2rem;
+  transform: translate3d(-50%, -50%, 0);
+  margin: 0 auto;
+  padding: 0 2rem;
   position: absolute;
 }
 
@@ -137,20 +136,16 @@ a.nav-link:hover {
 }
 
 .link-down {
-  color: #ffffff;
+  color: #fff;
 }
 
 .hr-short {
   position: relative;
   max-width: 70px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  margin-right: auto;
   border: 0;
   border-top: 6px solid #b04c2d;
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto 30px;
 }
 
 .trick-container img {
@@ -161,7 +156,7 @@ a.nav-link:hover {
   padding: 2em;
   font-size: 1.3em;
   background-color: #b04c2d;
-  color: #ffffff;
+  color: #fff;
   width: 100%;
 }
 
@@ -175,7 +170,8 @@ a.nav-link:hover {
   padding-left: 0.5em;
 }
 
-.trick-image-item, .trick.trick-video-item {
+.trick-image-item,
+.trick.trick-video-item {
   max-width: 25%;
   margin: 1.5em;
   float: left;
@@ -188,7 +184,7 @@ a.nav-link:hover {
 
 .trick-category-item {
   background-color: #b04c2d;
-  color: #ffffff;
+  color: #fff;
   padding: 2px 6px 1px 6px;
   margin: 0 2px;
 }
@@ -200,7 +196,8 @@ a.nav-link:hover {
   background-color: #ffece6;
 }
 
-.trick-comment-image img, .avatar {
+.trick-comment-image img,
+.avatar {
   vertical-align: middle;
   width: 50px;
   height: 50px;
@@ -233,19 +230,22 @@ a.nav-link:hover {
   display: inline-block;
 }
 
-.trick-admin-action a, .trick-admin-action button {
+.trick-admin-action a,
+.trick-admin-action button {
   font-size: 1em;
   margin: 0.5em;
   color: #b04c2d;
 }
 
-#tricks .trick-admin-action a, .trick-admin-action button {
+#tricks .trick-admin-action a,
+.trick-admin-action button {
   font-size: 1em;
   margin: 0;
   color: #b04c2d;
 }
 
-#trick-list, #trick-loader {
+#trick-list,
+#trick-loader {
   min-height: 20vh;
 }
 
@@ -278,7 +278,8 @@ a.nav-link:hover {
   border-left: 2px solid;
 }
 
-.comment-box, .trick-box {
+.comment-box,
+.trick-box {
   display: none;
 }
 
