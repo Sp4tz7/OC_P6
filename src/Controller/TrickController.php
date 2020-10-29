@@ -200,9 +200,9 @@ class TrickController extends AbstractController
     /**
      * @Route("/tricks", name="tricks")
      */
-    public function list(
+    public function List(
         TrickRepository $trickRepository,
-        TrickCatRepository $trickCatRepository
+        TrickCategoryRepository $trickCatRepository
     ) {
         return $this->render(
             'trick/list.html.twig',
@@ -242,7 +242,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/tricks/{category}", name="category-tricks")
      */
-    public function showTricksCat(TrickCatRepository $trickCatRepository, $category)
+    public function showTricksCat(TrickCategoryRepository $trickCatRepository, $category)
     {
         $category = $trickCatRepository->findOneBy(['slug' => $category]);
         if (!$category) {
