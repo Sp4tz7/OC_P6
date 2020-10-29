@@ -9,6 +9,7 @@ use App\Form\TrickType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickCategoryRepository;
 use App\Repository\TrickRepository;
+use App\Service\FileUploader;
 use App\Service\SlugManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -103,6 +104,7 @@ class TrickController extends AbstractController
     public function trickEdit(
         Request $request,
         SlugManager $slugManager,
+        FileUploader $fileUploader,
         TrickRepository $trickRepository,
         $id
     ) {
@@ -140,11 +142,9 @@ class TrickController extends AbstractController
             $trick->setEditedBy($this->getUser());
 
             $imageFile = $form['image']->getData();
-            $imageDirectory = $this->getParameter('tricks_img_directory');
 
             if ($imageFile) {
-                $filename = md5(uniqid()).'.'.$imageFile->guessExtension();
-                $imageFile->move($imageDirectory, $filename);
+                $filename = $fileUploader->upload($imageFile);
                 $trick->setImage($filename);
             }
 
@@ -155,16 +155,22 @@ class TrickController extends AbstractController
             foreach ($images as $image) {
                 $file = $image->getFileName();
                 if ($file) {
-                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move($imageDirectory, $fileName);
-                    $image->setFileName($fileName);
+                    $filename = $fileUploader->upload($file);
+                    $image->setFileName($filename);
                 }
                 $trick->addImage($image);
             }
 
-            foreach ($trick->getImages() as $image) {
-                if (!$image->getFileName()) {
-                    $trick->removeImage($image);
+            foreach ($originalImage as $image) {
+                if (false === $trick->getImages()->contains($image)) {
+                    $entityManager->remove($image);
+                    $fileUploader->remove($image);
+                }
+            }
+
+            foreach ($originalVideo as $video) {
+                if (false === $trick->getVideos()->contains($video)) {
+                    $entityManager->remove($video);
                 }
             }
 
