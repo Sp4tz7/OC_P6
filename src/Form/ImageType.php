@@ -4,12 +4,12 @@ namespace App\Form;
 
 use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Sodium\add;
 
 class ImageType extends AbstractType
 {
@@ -18,10 +18,22 @@ class ImageType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('file_name', FileType::class, [
-                'label' => 'Fichier',
+                'label' => 'Image',
                 'required' => false,
             ])
         ;
+        $builder->get('file_name')->addModelTransformer(new CallbackTransformer(
+            function ($TEST) {
+                if (null === $TEST) {
+
+                    return null;
+                }
+                return new File($TEST, false);
+            },
+            function ($fileAsFileObject) {
+                return  $fileAsFileObject;
+            }
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
