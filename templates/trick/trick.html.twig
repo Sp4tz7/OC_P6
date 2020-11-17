@@ -67,7 +67,7 @@
                         <h4>{{ comments|length }} {{ comments|length <= 1? 'Comment': 'Comments' }}</h4>
                         <div class="hr-short"></div>
                     </div>
-                    <div class="container my-5">
+                    <div class="container my-5" id="comments">
                         {% if is_granted('ROLE_USER') %}
                             {{ form_start(CommentForm) }}
                             <div class="row mb-5 comment-form">
@@ -87,8 +87,6 @@
                                 </div>
                             </div>
                         {% endif %}
-
-
                         {% for comment in comments %}
                             <div class="media mb-4 comment-box">
                                 <div class="media-left trick-comment-image">

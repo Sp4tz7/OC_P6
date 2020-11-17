@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,10 +36,21 @@ class CommentController extends AbstractController
             $em->persist($comment);
             $em->flush();
 
-            return new JsonResponse(['success' => 'Comment added'], 200);
+            $this->addFlash('success', 'Comment saved');
+
+            return $this->redirectToRoute('show-trick', [
+                'category' => $trick->getCategory()[0]->getSlug(),
+                'trick' => $trick->getSlug(),
+                '_fragment' => 'comments',
+            ]);
         }
 
-        return new JsonResponse(['error' => 'Token Invalid'], 400);
+        $this->addFlash('error', 'Token Invalid');
+
+        return $this->redirectToRoute('show-trick', [
+            'category' => $trick->getCategory()[0]->getSlug(),
+            'trick' => $trick->getSlug(),
+        ]);
     }
 
     /**
