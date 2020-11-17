@@ -23,14 +23,16 @@ class ImageType extends AbstractType
             ])
         ;
         $builder->get('file_name')->addModelTransformer(new CallbackTransformer(
-            function ($TEST) {
-                if (null === $TEST) {
+            function ($file) {
+                if (null === $file) {
 
                     return null;
                 }
-                return new File($TEST, false);
+
+                return new File($file, false);
             },
             function ($fileAsFileObject) {
+
                 return  $fileAsFileObject;
             }
         ));

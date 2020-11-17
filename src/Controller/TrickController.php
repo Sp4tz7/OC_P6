@@ -37,7 +37,7 @@ class TrickController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->trickManager->create($trick, $form);
+            $this->trickManager->create($trick, $form['image']->getData());
 
             $this->addFlash('success', 'New trick has been added');
 
@@ -101,7 +101,7 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->trickManager->update($trick, $form);
+            $this->trickManager->update($trick, $form['image']->getData());
             $this->addFlash('success', 'Trick has been edited');
 
             return $this->redirectToRoute('admin-trick-list');

@@ -42,19 +42,17 @@ class TrickManager
         $this->originalImages = $originalImages;
     }
 
-    public function create(Trick $trick, $form)
+    public function create(Trick $trick, $imageFile)
     {
         $trick->setDateAdd(new \DateTime());
         $trick->setAddedBy($this->security->getUser());
 
-        $this->persist($trick, $form);
+        $this->persist($trick, $imageFile);
     }
 
-    private function persist(Trick $trick, $form)
+    private function persist(Trick $trick, $imageFile)
     {
         $trick->setSlug($this->slugManager->slugThis($trick->getName()));
-
-        $imageFile = $form['image']->getData();
 
         if ($imageFile) {
             $filename = $this->fileUploader->upload($imageFile);
@@ -77,7 +75,7 @@ class TrickManager
         }
 
         // remove image if deleted
-        foreach ($this->originalImages as $key => $originalImage) {
+        foreach ($this->originalImages as $originalImage) {
             $image = $originalImage['image_object'];
             if (false === $trick->getImages()->contains($image)) {
                 $this->fileUploader->remove($image);
@@ -88,11 +86,11 @@ class TrickManager
         $this->entityManager->flush();
     }
 
-    public function update(Trick $trick, $form)
+    public function update(Trick $trick, $imageFile)
     {
         $trick->setDateEdit(new \DateTime());
         $trick->setEditedBy($this->security->getUser());
 
-        $this->persist($trick, $form);
+        $this->persist($trick, $imageFile);
     }
 }
