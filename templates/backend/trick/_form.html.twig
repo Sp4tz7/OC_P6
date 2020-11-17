@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <div class="card-heading">
                             {% set imgUrl =  row.vars.value.filename %}
-                            <img src="{{ asset('uploads/tricks/'~imgUrl.getFileName) }}" alt="{{ imgUrl.getFileName }}"
+                            <img src="{{ asset('uploads/tricks/'~imgUrl) }}" alt="{{ imgUrl }}"
                                  class="img-fluid mb-3 blah" style="max-height: 300px"/>
                         </div>
                         {{ form_row(row) }}

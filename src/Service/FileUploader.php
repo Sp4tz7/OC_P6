@@ -5,18 +5,21 @@ namespace App\Service;
 use App\Entity\Image;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 class FileUploader
 {
     private $targetDirectory;
 
-    public function __construct($targetDirectory)
+    private $filesystem;
+
+    public function __construct($targetDirectory, Filesystem $filesystem )
     {
+        $this->filesystem = $filesystem;
         $this->targetDirectory = $targetDirectory;
     }
 
-    public function upload(UploadedFile $file)
+    public function upload(File $file)
     {
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
@@ -29,9 +32,9 @@ class FileUploader
         return $fileName;
     }
 
-    public function remove(Filesystem $filesystem, Image $file)
+    public function remove( Image $file)
     {
-        $filesystem->remove($this->getTargetDirectory().'/'.$file->getFilename());
+        $this->filesystem->remove($this->getTargetDirectory().'/'.$file->getFilename());
     }
 
     public function getTargetDirectory()

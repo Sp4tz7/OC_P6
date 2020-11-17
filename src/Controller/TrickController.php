@@ -9,18 +9,23 @@ use App\Form\TrickType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickCategoryRepository;
 use App\Repository\TrickRepository;
-use App\Service\FileUploader;
 use App\Service\SlugManager;
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Service\Trick\Manager\TrickManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TrickController extends AbstractController
 {
+    private $trickManager;
+
+    public function __construct(TrickManager $trickManager)
+    {
+        $this->trickManager = $trickManager;
+    }
+
     /**
      * @Route("/admin/trick/add", name="admin-trick-add")
      */
@@ -31,34 +36,8 @@ class TrickController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $trick->setDateAdd(new \DateTime());
-            $trick->setSlug($slugManager->slugThis($trick->getName()));
-            $trick->setAddedBy($this->getUser());
 
-            $imageFile = $form['image']->getData();
-            $imageDirectory = $this->getParameter('tricks_img_directory');
-            if ($imageFile) {
-                $filename = md5(uniqid()).'.'.$imageFile->guessExtension();
-                $imageFile->move($imageDirectory, $filename);
-                $trick->setImage($filename);
-            }
-
-            $entityManager->persist($trick);
-
-            $images = $form->getData()->getImages()->toArray();
-            foreach ($images as $image) {
-                $file = $image->getFileName();
-                if ($file) {
-                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move($imageDirectory, $fileName);
-                    $image->setName($trick->getName());
-                    $image->setFileName($fileName);
-                }
-                $trick->addImage($image);
-            }
-
-            $entityManager->flush();
+            $this->trickManager->create($trick, $form['image']->getData());
 
             $this->addFlash('success', 'New trick has been added');
 
@@ -100,11 +79,13 @@ class TrickController extends AbstractController
 
     /**
      * @Route("/admin/trick/edit/{id}", name="admin-trick-edit")
+     *
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function trickEdit(
         Request $request,
-        SlugManager $slugManager,
-        FileUploader $fileUploader,
         TrickRepository $trickRepository,
         $id
     ) {
@@ -114,68 +95,13 @@ class TrickController extends AbstractController
             throw $this->createNotFoundException('This trick does not exists');
         }
 
-        $imageDirectory = $this->getParameter('tricks_img_directory');
-
-        foreach ($trick->getImages() as $img) {
-            $img->setFilename(new File(
-                $imageDirectory.'/'.$img->getFileName(), false
-            ));
-        }
+        $this->trickManager->setOriginalImages($trick->getImages()->getValues());
 
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
-        $originalVideo = new ArrayCollection();
-        foreach ($trick->getVideos() as $video) {
-            $originalVideo->add($video);
-        }
-
-        $originalImage = new ArrayCollection();
-        foreach ($trick->getImages() as $image) {
-            $originalImage->add($image);
-        }
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $trick->setDateEdit(new \DateTime());
-            $trick->setSlug($slugManager->slugThis($trick->getName()));
-            $trick->setEditedBy($this->getUser());
-
-            $imageFile = $form['image']->getData();
-
-            if ($imageFile) {
-                $filename = $fileUploader->upload($imageFile);
-                $trick->setImage($filename);
-            }
-
-            $entityManager->persist($trick);
-
-            $images = $form->getData()->getImages()->toArray();
-
-            foreach ($images as $image) {
-                $file = $image->getFileName();
-                if ($file) {
-                    $filename = $fileUploader->upload($file);
-                    $image->setFileName($filename);
-                }
-                $trick->addImage($image);
-            }
-
-            foreach ($originalImage as $image) {
-                if (false === $trick->getImages()->contains($image)) {
-                    $entityManager->remove($image);
-                    $fileUploader->remove($image);
-                }
-            }
-
-            foreach ($originalVideo as $video) {
-                if (false === $trick->getVideos()->contains($video)) {
-                    $entityManager->remove($video);
-                }
-            }
-
-            $entityManager->flush();
-
+            $this->trickManager->update($trick, $form['image']->getData());
             $this->addFlash('success', 'Trick has been edited');
 
             return $this->redirectToRoute('admin-trick-list');
