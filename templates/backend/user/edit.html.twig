@@ -1,0 +1,26 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Administration - Edit user{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ path('admin') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Edit user</li>
+        </ol>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Edit User
+                    </div>
+                    <div class="card-body">
+                        {{ form(form) }}
+                     </div>
+                </div>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

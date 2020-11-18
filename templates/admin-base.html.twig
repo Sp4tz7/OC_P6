@@ -26,6 +26,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <span class="m-3">{{ app.user.getFirstname ~ ' ' ~ app.user.getLastname  }}</span>
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ path('admin-user-edit', {'id': app.user.getId}) }}">My account</a>
                 <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
             </div>
         </li>
@@ -43,10 +44,12 @@
                     <a class="nav-link" href="{{ path('home') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                         Back to website</a>
+                    {% if is_granted('ROLE_SUPERADMIN') %}
                     <div class="sb-sidenav-menu-heading">Users</div>
                     <a class="nav-link" href="{{ path('admin-user-list') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                         List</a>
+                    {% endif %}
                     <div class="sb-sidenav-menu-heading">Tricks</div>
                     <a class="nav-link" href="{{ path('admin-trick-list') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>

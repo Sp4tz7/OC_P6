@@ -46,13 +46,16 @@
                                         <td>{% if user.getRoles.0 == 'ROLE_SUPER_ADMIN' %}
                                                 Super admin
                                             {% elseif user.getRoles.0 == 'ROLE_ADMIN' %}
-                                                Administrateur
+                                                Editor
                                             {% elseif user.getRoles.0 == 'ROLE_USER' %}
-                                                Utilisateur
+                                                Member
                                             {% endif %}</td>
                                         <td>{{ user.getTricks|length }}</td>
                                         <td>
+                                            <a href="{{ path('admin-user-edit', {'id': user.getId()}) }}"><i
+                                                        class="fas fa-pencil-alt" title="Edit user"></i></a>
                                             <a href="#" data-target="#modal" data-toggle="modal" class="delete_user"
+                                               title="Delete user"
                                                data-id="{{ user.getId() }}"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>

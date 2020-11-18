@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserProfileType;
+use App\Form\UserAdminEditType;
 use App\Form\UserRegisterType;
 use App\Manager\MailerManager;
 use App\Repository\UserRepository;
@@ -36,6 +37,47 @@ class UserController extends AbstractController
         return $this->render('backend/user/list.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/admin/user/{id}", name="admin-user-edit")
+     */
+    public function editUser(Request $request, Filesystem $filesystem, UserRepository $userRepository, $id)
+    {
+        $user = $userRepository->find($id);
+        $form = $this->createForm(UserAdminEditType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $oldAvatar = $user->getAvatar();
+            $avatarFile = $form['avatar']->getData();
+            if ($avatarFile) {
+                $filename = md5(uniqid()).'.'.$avatarFile->guessExtension();
+                $avatarFile->move(
+                    $this->getParameter('avatar_img_directory'),
+                    $filename
+                );
+                if ($oldAvatar) {
+                    $filesystem->remove($this->getParameter('avatar_img_directory').'/'.$oldAvatar);
+                }
+                $user->setAvatar($filename);
+            }
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Your profile has been updated');
+        }
+
+        return $this->render(
+            'backend/user/edit.html.twig',
+            [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
