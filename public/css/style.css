@@ -194,6 +194,7 @@ a.navbar-brand img {
   opacity: 1;
   transform: translate(0px, 0px);
   visibility: visible;
+  text-shadow: 0.5px 0.5px 0.5px #505a61;
 }
 
 .slogan {
@@ -338,6 +339,13 @@ a.navbar-brand img {
 
 .comment-box {
   border-left: 2px solid;
+  background-color: #fff;
+  box-shadow: 0 0 3.125em rgba(72, 111, 142, 0.1);
+  border-radius: 0.313em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0.9em 1.9em 0.75em;
 }
 
 .comment-box,
@@ -360,12 +368,18 @@ a.navbar-brand img {
 .media-heading {
   margin-top: 0;
   margin-bottom: 5px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.9em;
 }
 
 .media-object {
   height: 50px;
   width: 50px;
   border-radius: 50px !important;
+}
+
+.c-date {
+  font-size: 0.8em;
 }
 
 .media-left {

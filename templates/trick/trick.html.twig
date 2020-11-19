@@ -64,7 +64,7 @@
             </div>
             <div class="container">
                 <div class="row mt-5">
-                    <div class="col-12 trick-description">{{ trick.getDescription }}</div>
+                    <div class="col-12 trick-description">{{ trick.getDescription|raw }}</div>
                 </div>
             </div>
             <div class="bg-light-blue pt-3 mt-5">
@@ -75,7 +75,7 @@
                             <h4>{{ comments|length }} {{ comments|length <= 1? 'Comment': 'Comments' }}</h4>
                             <div class="hr-short"></div>
                         </div>
-                        <div class="container my-5" id="comments">
+                        <div class="my-5" id="comments">
                             {% if is_granted('ROLE_USER') %}
                                 {{ form_start(CommentForm) }}
                                 <div class="row mb-5 comment-form">
@@ -105,8 +105,7 @@
                                     <div class="media-body">
                                         <h4 class="media-heading">
                                             <a href="#" class="c-font-bold">{{ comment.getAuthor.getUserName }}</a>
-                                            on <span
-                                                    class="c-date text-uppercase">{{ comment.getDateAdd|date('d M. Y, H:ia') }}</span>
+                                             <span class="c-date text-muted float-right">{{ comment.getDateAdd|date('d M. Y, H:ia') }}</span>
                                         </h4>
                                         {{ comment.getMessage }}
                                     </div>
