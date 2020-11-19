@@ -1,7 +1,8 @@
 $primary-font: 'Roboto', sans-serif;
 $secondary-font: 'Exo 2', cursive;
-$primary-color: #fff;
-$secondary-color: #b04c2d;
+$primary-color: #eca549;
+$secondary-color: #fff;
+$third-color: #3377a2;
 
 html {
   scroll-behavior: smooth;
@@ -9,24 +10,28 @@ html {
 
 body {
   font-family: $primary-font;
-  color: $secondary-color;
-  background-color: $primary-color;
+  color: $third-color;
+  background-color: $secondary-color;
 }
 
 a,
 a.nav-link,
 .navbar-dark .navbar-nav .nav-link {
-  color: $secondary-color;
+  color: $primary-color;
 }
 
 a.nav-link:hover {
-  color: $primary-color !important;
+  color: $secondary-color !important;
   border-radius: 4px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  font-size: 1.5em;
-  font-weight: 800;
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0px;
 }
 
 h1 {
@@ -45,11 +50,35 @@ h4 {
 
 header {
   height: 10vh;
-  background: $primary-color;
-  color: $secondary-color;
+  color: #fff;
+  background: linear-gradient(to bottom, #1a6695, #3377a2);
+}
+
+.header-full header {
+  background: transparent;
+}
+
+.header-full header.sticky-top {
+
+  background: linear-gradient(to bottom, #1a6695, #3377a2);
+}
+
+footer {
+  background-color: #202528 ;
+  color: #4f5051;
+}
+
+footer a {
+  color: #7e8081;
 }
 
 .btn-primary {
+  background-color: $primary-color !important;
+  border-color: $primary-color !important;
+  color: $secondary-color !important;
+}
+
+.btn-secondary {
   background-color: $secondary-color !important;
   border-color: $secondary-color !important;
 }
@@ -61,28 +90,33 @@ header {
   border-color: $secondary-color !important;
 }
 
+.btn-secondary:hover,
+.btn-secondary:active {
+  background-color: $secondary-color !important;
+  color: $primary-color !important;
+  border-color: $primary-color !important;
+}
+
 .container-fluid {
   min-height: 85vh;
   padding: 0;
 }
 
-.main-container {
-  border-top: 2px solid $secondary-color;
-}
 
 a {
-  color: $secondary-color;
+  color: $third-color;
   text-decoration: none;
 }
 
 a:hover {
-  color: $secondary-color !important;
+  color: $primary-color !important;
   text-decoration: underline;
 }
 
 
 .trick-container img {
   width: 100%;
+  max-height: 100vh;
 }
 
 .trick-comment-image img,
@@ -94,8 +128,6 @@ a:hover {
 }
 
 a.navbar-brand {
-  position: absolute;
-  top: 40px;
   padding: 0 1em;
   border-radius: 4px;
   z-index: 1;
@@ -116,10 +148,10 @@ a.navbar-brand img {
 .home-background {
   background-repeat: no-repeat;
   background-size: cover;
-  height: 90vh;
+  height: 100vh;
   background-position: center;
-  background-image: url('../img/home.webp');
-  filter: grayscale(0.4);
+  background-image: url('../img/home.jpg');
+  margin-top: -10vh;
 
 }
 
@@ -146,12 +178,40 @@ a.navbar-brand img {
 }
 
 #home h1 {
-  line-height: 1.2;
-  font-weight: 600;
-  display: block;
-  max-width: 600px;
-  margin-bottom: 10px;
-  font-size: 3.5em;
+  text-transform: uppercase;
+  font-style: italic;
+  height: auto;
+  width: auto;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 0px;
+  min-width: 0px;
+  max-height: none;
+  max-width: none;
+  text-align: inherit;
+  line-height: 135px;
+  letter-spacing: 0px;
+  font-weight: 900;
+  font-size: 119px;
+  padding-left: 15px;
+  padding-right: 15px;
+  transform-origin: 50% 50%;
+  opacity: 1;
+  transform: translate(0px, 0px);
+  visibility: visible;
+}
+
+.slogan {
+  font-size: 3.75em;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1.03;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 2.075em;
+  margin-bottom: 0.5em;
+  color: #505a61;
 }
 
 .link-down {
@@ -170,19 +230,20 @@ a.navbar-brand img {
 .trick-description {
   padding: 2em;
   font-size: 1.3em;
-  background-color: $secondary-color;
-  color: $primary-color;
+  background-color: $third-color;
+  color: $secondary-color;
   width: 100%;
 }
 
 .trick-name {
   position: absolute;
-  top: 50%;
-  left: 25%;
+  top: calc(0px + 20%);
+  left: 35%;
   font-size: 5em;
   font-weight: 800;
   border-left: 5px solid;
   padding-left: 0.5em;
+  color: $primary-color;
 }
 
 .trick-image-item,
@@ -279,7 +340,7 @@ a.navbar-brand img {
 
 .login-form input {
   border: none;
-  border-bottom: 3px solid #aa4325;
+  border-bottom: 3px solid $third-color;
 }
 
 .comment-box {
@@ -289,6 +350,10 @@ a.navbar-brand img {
 .comment-box,
 .trick-box {
   display: none;
+}
+
+.trick-box img {
+  min-height: 150px;
 }
 
 .comment-form label {

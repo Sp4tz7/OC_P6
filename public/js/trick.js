@@ -1,5 +1,15 @@
 const Trick = function () {
     const initTrick = function (maxTricks, maxComments) {
+
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            if (scroll >= 1) {
+                $("header").addClass("sticky-top");
+            } else {
+                $("header").removeClass("sticky-top");
+            }
+        });
+
         $('.delete_trick').on("click", function () {
             $('#deleteTrick').attr("data-id", $(this).data("id")).attr(
                 "data-url",

@@ -1,6 +1,6 @@
 <div class="row">
     {% for trick in tricks %}
-        <div class="col-md-3 my-3 trick-box" id="trick-{{ trick.getId }}">
+        <div class="col-md-4 my-3 trick-box" id="trick-{{ trick.getId }}">
             <div class="card mb-4 shadow-sm">
                 <img class="card-img-top"
                      data-src="{{ absolute_url( asset( tricks_img_url ~ trick.getImage )) }}"

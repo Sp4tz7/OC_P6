@@ -199,6 +199,7 @@ class TrickController extends AbstractController
             'frontend/home.html.twig',
             [
                 'tricks' => $trickRepository->findBy([], ['date_add' => 'DESC']),
+                'class' => 'header-full',
             ]
         );
     }

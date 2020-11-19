@@ -6,3 +6,4 @@ twig:
         tricks_img_url: '%tricks_img_url%'
         limit_tricks: '%app.limit_tricks%'
         limit_comments: '%app.limit_comments%'
+        class: ''

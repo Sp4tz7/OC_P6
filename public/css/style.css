@@ -4,14 +4,14 @@ html {
 
 body {
   font-family: "Roboto", sans-serif;
-  color: #b04c2d;
+  color: #3377a2;
   background-color: #fff;
 }
 
 a,
 a.nav-link,
 .navbar-dark .navbar-nav .nav-link {
-  color: #b04c2d;
+  color: #eca549;
 }
 
 a.nav-link:hover {
@@ -20,8 +20,12 @@ a.nav-link:hover {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  font-size: 1.5em;
-  font-weight: 800;
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0px;
 }
 
 h1 {
@@ -40,20 +44,50 @@ h4 {
 
 header {
   height: 10vh;
-  background: #fff;
-  color: #b04c2d;
+  color: #fff;
+  background: linear-gradient(to bottom, #1a6695, #3377a2);
+}
+
+.header-full header {
+  background: transparent;
+}
+
+.header-full header.sticky-top {
+  background: linear-gradient(to bottom, #1a6695, #3377a2);
+}
+
+footer {
+  background-color: #202528;
+  color: #4f5051;
+}
+
+footer a {
+  color: #7e8081;
 }
 
 .btn-primary {
-  background-color: #b04c2d !important;
-  border-color: #b04c2d !important;
+  background-color: #eca549 !important;
+  border-color: #eca549 !important;
+  color: #fff !important;
+}
+
+.btn-secondary {
+  background-color: #fff !important;
+  border-color: #fff !important;
 }
 
 .btn-primary:hover,
 .btn-primary:active {
+  background-color: #eca549 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
   background-color: #fff !important;
-  color: #b04c2d !important;
-  border-color: #b04c2d !important;
+  color: #eca549 !important;
+  border-color: #eca549 !important;
 }
 
 .container-fluid {
@@ -61,22 +95,19 @@ header {
   padding: 0;
 }
 
-.main-container {
-  border-top: 2px solid #b04c2d;
-}
-
 a {
-  color: #b04c2d;
+  color: #3377a2;
   text-decoration: none;
 }
 
 a:hover {
-  color: #b04c2d !important;
+  color: #eca549 !important;
   text-decoration: underline;
 }
 
 .trick-container img {
   width: 100%;
+  max-height: 100vh;
 }
 
 .trick-comment-image img,
@@ -88,8 +119,6 @@ a:hover {
 }
 
 a.navbar-brand {
-  position: absolute;
-  top: 40px;
   padding: 0 1em;
   border-radius: 4px;
   z-index: 1;
@@ -110,10 +139,10 @@ a.navbar-brand img {
 .home-background {
   background-repeat: no-repeat;
   background-size: cover;
-  height: 90vh;
+  height: 100vh;
   background-position: center;
-  background-image: url("../img/home.webp");
-  filter: grayscale(0.4);
+  background-image: url("../img/home.jpg");
+  margin-top: -10vh;
 }
 
 #home .box-center {
@@ -139,12 +168,40 @@ a.navbar-brand img {
 }
 
 #home h1 {
-  line-height: 1.2;
-  font-weight: 600;
-  display: block;
-  max-width: 600px;
-  margin-bottom: 10px;
-  font-size: 3.5em;
+  text-transform: uppercase;
+  font-style: italic;
+  height: auto;
+  width: auto;
+  color: white;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 0px;
+  min-width: 0px;
+  max-height: none;
+  max-width: none;
+  text-align: inherit;
+  line-height: 135px;
+  letter-spacing: 0px;
+  font-weight: 900;
+  font-size: 119px;
+  padding-left: 15px;
+  padding-right: 15px;
+  transform-origin: 50% 50%;
+  opacity: 1;
+  transform: translate(0px, 0px);
+  visibility: visible;
+}
+
+.slogan {
+  font-size: 3.75em;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1.03;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 2.075em;
+  margin-bottom: 0.5em;
+  color: #505a61;
 }
 
 .link-down {
@@ -155,7 +212,7 @@ a.navbar-brand img {
   position: relative;
   max-width: 70px;
   border: 0;
-  border-top: 6px solid #b04c2d;
+  border-top: 6px solid #fff;
   text-align: left;
   margin: 10px auto 30px;
 }
@@ -163,19 +220,20 @@ a.navbar-brand img {
 .trick-description {
   padding: 2em;
   font-size: 1.3em;
-  background-color: #b04c2d;
+  background-color: #3377a2;
   color: #fff;
   width: 100%;
 }
 
 .trick-name {
   position: absolute;
-  top: 50%;
-  left: 25%;
+  top: calc(0px + 20%);
+  left: 35%;
   font-size: 5em;
   font-weight: 800;
   border-left: 5px solid;
   padding-left: 0.5em;
+  color: #eca549;
 }
 
 .trick-image-item,
@@ -191,8 +249,8 @@ a.navbar-brand img {
 }
 
 .trick-category-item {
-  background-color: #b04c2d;
-  color: #fff;
+  background-color: #fff;
+  color: #eca549;
   padding: 2px 6px 1px 6px;
   margin: 0 2px;
 }
@@ -234,14 +292,14 @@ a.navbar-brand img {
 .trick-admin-action button {
   font-size: 1em;
   margin: 0.5em;
-  color: #b04c2d;
+  color: #fff;
 }
 
 #tricks .trick-admin-action a,
 .trick-admin-action button {
   font-size: 1em;
   margin: 0;
-  color: #b04c2d;
+  color: #fff;
 }
 
 #trick-list,
@@ -271,7 +329,7 @@ a.navbar-brand img {
 
 .login-form input {
   border: none;
-  border-bottom: 3px solid #aa4325;
+  border-bottom: 3px solid #3377a2;
 }
 
 .comment-box {
@@ -281,6 +339,10 @@ a.navbar-brand img {
 .comment-box,
 .trick-box {
   display: none;
+}
+
+.trick-box img {
+  min-height: 150px;
 }
 
 .comment-form label {

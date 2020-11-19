@@ -8,7 +8,7 @@
         'id': 'deleteTrick'} %}
     {% endembed %}
     <div class="bt-5 ">
-        <div class="container trick-container">
+        <div class="container-fluid trick-container">
             {% set main_image =  absolute_url( asset('img/home.webp')) %}
             {% if trick.getImage %}
                 {% set main_image =  absolute_url( asset( tricks_img_url ~ trick.getImage )) %}
@@ -27,96 +27,98 @@
             <img class="img-fluid" src="{{ main_image }}"
                  alt="{{ trick.getName }}" title="{{ trick.getName }}">
             <div class="trick-name">{{ trick.getName }}</div>
-            <div class="row mt-5">
-                {% for image in trick.getImages %}
-                    <div class="col-md-2">
-                        <a href="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) }}">
-                            <img src="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) | imagine_filter('trick_thumb') }}"
-                                 alt="{{ image.getName }}" title="{{ image.getName }}"></a>
-                    </div>
-                {% endfor %}
-                {% for video in trick.getVideos %}
-                    <div class="col-md-2">
-                        <iframe width="100%" src="{{ video.url }}" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                    </div>
-                {% endfor %}
-
-            </div>
-            <div class="row mt-5">
-                <div class="col-12 trick-description">{{ trick.getDescription }}</div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-12 trick-meta text-left">
-                    By <span class="text-uppercase font-weight-bold"> {{ trick.getAddedBy.getUsername }}</span>
-                    On <span class="text-uppercase">{{ trick.getDateAdd|date('d M Y, H:i a') }}</span>
-                    {% if trick.getDateEdit %}
-                        |
-                        <span>Edited at: {{ trick.getDateEdit|date('d M Y') }} by {{ trick.getEditedBy.getUsername }}</span>
-                    {% endif %}
-                    {% for category in trick.getCategory %}
-                        <a href="{{ path('category-tricks', {'category': category.getSlug}) }}"><span
-                            class="trick-category-item float-right">{{ category.getName }}</span></a>
+            <div class="container">
+                <div class="row mt-5">
+                    {% for image in trick.getImages %}
+                        <div class="col-md-2">
+                            <a href="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) }}">
+                                <img src="{{ absolute_url( asset( tricks_img_url ~ image.getFileName )) | imagine_filter('trick_thumb') }}"
+                                     alt="{{ image.getName }}" title="{{ image.getName }}"></a>
+                        </div>
                     {% endfor %}
+                    {% for video in trick.getVideos %}
+                        <div class="col-md-2">
+                            <iframe width="100%" src="{{ video.url }}" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                    {% endfor %}
+
                 </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-12">
-                    <div class="text-center">
-                        <h4>{{ comments|length }} {{ comments|length <= 1? 'Comment': 'Comments' }}</h4>
-                        <div class="hr-short"></div>
-                    </div>
-                    <div class="container my-5" id="comments">
-                        {% if is_granted('ROLE_USER') %}
-                            {{ form_start(CommentForm) }}
-                            <div class="row mb-5 comment-form">
-                                <div class="col-md-8">
-                                    {{ form_row(CommentForm.message) }}
-                                </div>
-                                <div class="col-md-4">
-                                    {{ form_row(CommentForm.save) }}
-                                </div>
-                            </div>
-                            {{ form_end(CommentForm) }}
-                        {% else %}
-                            <div class="row my-5">
-                                <div class="col-12 alert alert-warning"> Please <a
-                                            href="{{ path('app_login', { 'redirect': 'show-trick', 'category': trick.getCategory.0.getSlug, 'trick': trick.getSlug }) }}">login</a>
-                                    to leave a comment.
-                                </div>
-                            </div>
+                <div class="row mt-5">
+                    <div class="col-12 trick-meta text-left">
+                        By <span class="text-uppercase font-weight-bold"> {{ trick.getAddedBy.getUsername }}</span>
+                        On <span class="text-uppercase">{{ trick.getDateAdd|date('d M Y, H:i a') }}</span>
+                        {% if trick.getDateEdit %}
+                            |
+                            <span>Edited at: {{ trick.getDateEdit|date('d M Y') }} by {{ trick.getEditedBy.getUsername }}</span>
                         {% endif %}
-                        {% for comment in comments %}
-                            <div class="media mb-4 comment-box">
-                                <div class="media-left trick-comment-image">
-                                    <img class="media-object" alt="{{ comment.getAuthor.getUserName }}"
-                                         title="{{ comment.getAuthor.getUserName }}"
-                                         src="{{ absolute_url( asset( avatar_img_url ~  comment.getAuthor.getAvatar )) | imagine_filter('avatar_thumb') }}">
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">
-                                        <a href="#" class="c-font-bold">{{ comment.getAuthor.getUserName }}</a>
-                                        on <span
-                                                class="c-date text-uppercase">{{ comment.getDateAdd|date('d M. Y, H:ia') }}</span>
-                                    </h4>
-                                    {{ comment.getMessage }}
-                                </div>
-                            </div>
+                        {% for category in trick.getCategory %}
+                            <a href="{{ path('category-tricks', {'category': category.getSlug}) }}"><span
+                                        class="trick-category-item float-right">{{ category.getName }}</span></a>
                         {% endfor %}
-                        {% if comments %}
-                            <div class="row mt-5">
-                                <div class="col-12 text-center">
-                                    <div id="loadMoreComments">
-                                        <a href="#" class="btn btn-primary">Load More</a>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12 trick-description">{{ trick.getDescription }}</div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <h4>{{ comments|length }} {{ comments|length <= 1? 'Comment': 'Comments' }}</h4>
+                            <div class="hr-short"></div>
+                        </div>
+                        <div class="container my-5" id="comments">
+                            {% if is_granted('ROLE_USER') %}
+                                {{ form_start(CommentForm) }}
+                                <div class="row mb-5 comment-form">
+                                    <div class="col-md-8">
+                                        {{ form_row(CommentForm.message) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form_row(CommentForm.save) }}
                                     </div>
                                 </div>
-                            </div>
-                        {% endif %}
+                                {{ form_end(CommentForm) }}
+                            {% else %}
+                                <div class="row my-5">
+                                    <div class="col-12 alert alert-warning"> Please <a class="btn btn-primary"
+                                                href="{{ path('app_login', { 'redirect': 'show-trick', 'category': trick.getCategory.0.getSlug, 'trick': trick.getSlug }) }}">login</a>
+                                        to leave a comment.
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% for comment in comments %}
+                                <div class="media mb-4 comment-box">
+                                    <div class="media-left trick-comment-image">
+                                        <img class="media-object" alt="{{ comment.getAuthor.getUserName }}"
+                                             title="{{ comment.getAuthor.getUserName }}"
+                                             src="{{ absolute_url( asset( avatar_img_url ~  comment.getAuthor.getAvatar )) }}">
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            <a href="#" class="c-font-bold">{{ comment.getAuthor.getUserName }}</a>
+                                            on <span
+                                                    class="c-date text-uppercase">{{ comment.getDateAdd|date('d M. Y, H:ia') }}</span>
+                                        </h4>
+                                        {{ comment.getMessage }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% if comments %}
+                                <div class="row mt-5">
+                                    <div class="col-12 text-center">
+                                        <div id="loadMoreComments">
+                                            <a href="#" class="btn btn-primary">Load More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
 
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>

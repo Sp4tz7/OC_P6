@@ -248,7 +248,7 @@ class UserController extends AbstractController
 
                 $mailerManager->sendPasswordRecoveryMail($user);
             }
-            $this->addFlash('success', 'Your account has been activated. Please Login!');
+            $this->addFlash('success', 'An email has been sent!');
         }
 
         return $this->render(
