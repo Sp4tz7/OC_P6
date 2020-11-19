@@ -136,6 +136,10 @@ a.navbar-brand img {
   max-width: 60%;
 }
 
+.bg-light-blue {
+  background-color: #edf4f8;
+}
+
 .home-background {
   background-repeat: no-repeat;
   background-size: cover;
@@ -212,7 +216,7 @@ a.navbar-brand img {
   position: relative;
   max-width: 70px;
   border: 0;
-  border-top: 6px solid #fff;
+  border-top: 6px solid #eca549;
   text-align: left;
   margin: 10px auto 30px;
 }

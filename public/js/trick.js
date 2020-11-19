@@ -10,6 +10,10 @@ const Trick = function () {
             }
         });
 
+        $('.scrollTricks').on('click', function (){
+            $('html, body').animate({scrollTop: $('#tricks').offset().top -95 }, 'slow');
+        });
+
         $('.delete_trick').on("click", function () {
             $('#deleteTrick').attr("data-id", $(this).data("id")).attr(
                 "data-url",

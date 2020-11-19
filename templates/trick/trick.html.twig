@@ -45,6 +45,8 @@
                     {% endfor %}
 
                 </div>
+            </div>
+            <div class="container">
                 <div class="row mt-5">
                     <div class="col-12 trick-meta text-left">
                         By <span class="text-uppercase font-weight-bold"> {{ trick.getAddedBy.getUsername }}</span>
@@ -59,9 +61,14 @@
                         {% endfor %}
                     </div>
                 </div>
+            </div>
+            <div class="container">
                 <div class="row mt-5">
                     <div class="col-12 trick-description">{{ trick.getDescription }}</div>
                 </div>
+            </div>
+            <div class="bg-light-blue pt-3 mt-5">
+            <div class="container">
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="text-center">
@@ -83,7 +90,7 @@
                             {% else %}
                                 <div class="row my-5">
                                     <div class="col-12 alert alert-warning"> Please <a class="btn btn-primary"
-                                                href="{{ path('app_login', { 'redirect': 'show-trick', 'category': trick.getCategory.0.getSlug, 'trick': trick.getSlug }) }}">login</a>
+                                                                                       href="{{ path('app_login', { 'redirect': 'show-trick', 'category': trick.getCategory.0.getSlug, 'trick': trick.getSlug }) }}">login</a>
                                         to leave a comment.
                                     </div>
                                 </div>
@@ -121,6 +128,6 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
-
 {% endblock %}
