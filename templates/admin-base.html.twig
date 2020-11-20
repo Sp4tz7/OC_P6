@@ -44,7 +44,7 @@
                     <a class="nav-link" href="{{ path('home') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-globe"></i></div>
                         Back to website</a>
-                    {% if is_granted('ROLE_SUPERADMIN') %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <div class="sb-sidenav-menu-heading">Users</div>
                     <a class="nav-link" href="{{ path('admin-user-list') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
