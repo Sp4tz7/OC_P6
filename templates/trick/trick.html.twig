@@ -24,8 +24,11 @@
                     </button>
                 </div>
             {% endif %}
-            <img class="img-fluid" src="{{ main_image }}"
-                 alt="{{ trick.getName }}" title="{{ trick.getName }}">
+            <div style="background: url('{{ main_image }}');background-size: cover; background-position: center;
+                   background-repeat: no-repeat;
+                    height: 90vh;"></div>
+            {#<img class="img-fluid" src="{{ main_image }}"
+                 alt="{{ trick.getName }}" title="{{ trick.getName }}">#}
             <div class="trick-name">{{ trick.getName }}</div>
             <div class="container">
                 <div class="row mt-5">
@@ -57,7 +60,7 @@
                         {% endif %}
                         {% for category in trick.getCategory %}
                             <a href="{{ path('category-tricks', {'category': category.getSlug}) }}"><span
-                                        class="trick-category-item float-right">{{ category.getName }}</span></a>
+                                        class="float-right badge badge-info">{{ category.getName }}</span></a>
                         {% endfor %}
                     </div>
                 </div>

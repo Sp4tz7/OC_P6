@@ -154,7 +154,7 @@ class TrickController extends AbstractController
             throw $this->createNotFoundException('This trick does not exists');
         }
 
-        $comments = $commentRepository->findBy(['trick' => $trick]);
+        $comments = $commentRepository->findBy(['trick' => $trick], ['date_add' => 'ASC']);
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment, [
             'action' => $this->generateUrl('add-comment', ['id' => $trick->getId()]),
