@@ -52,7 +52,7 @@ const Trick = function () {
         $("#loadMoreComments").on("click", function (e) {
             e.preventDefault();
             $(".comment-box:hidden").slice(0, maxComments).slideDown().css("display", "flex");
-            if ($(".comment-box:hidden").length == 0) {
+            if ($(".comment-box:hidden").length === 0) {
                 $("#loadMoreComments").fadeOut("slow");
             }
         });

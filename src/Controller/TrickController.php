@@ -9,7 +9,6 @@ use App\Form\TrickType;
 use App\Repository\CommentRepository;
 use App\Repository\TrickCategoryRepository;
 use App\Repository\TrickRepository;
-use App\Service\SlugManager;
 use App\Service\Trick\Manager\TrickManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -29,7 +28,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/admin/trick/add", name="admin-trick-add")
      */
-    public function trickAdd(Request $request, SlugManager $slugManager)
+    public function trickAdd(Request $request)
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
