@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="media-body">
                                         <h4 class="media-heading">
-                                            <a href="#" class="c-font-bold">{{ comment.getAuthor.getUserName }}</a>
+                                            <a href="#" class="c-font-bold">{{ comment.getAuthor.getFirstName ~ ' ' ~ comment.getAuthor.getLastName}}</a>
                                              <span class="c-date text-muted float-right">{{ comment.getDateAdd|date('d M. Y, H:ia') }}</span>
                                         </h4>
                                         {{ comment.getMessage }}
