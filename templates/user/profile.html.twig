@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+{% block container %}
+    <div class="container login-container mt-5">
+    <h1 class="my-5">{% if user.getAvatar %}
+    <img class="avatar" src="{{ absolute_url( asset( avatar_img_url ~ user.getAvatar )) | imagine_filter('avatar_thumb') }}">
+        {% endif %}My profile</h1>
+            {{ form(form) }}
+    <a href="{{ path('profile-password') }}">Change password</a>
+    </div>
+{% endblock %}

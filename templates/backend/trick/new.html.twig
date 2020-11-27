@@ -1,0 +1,29 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Add new trick {{ parent() }}{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <h1 class="mt-4">New trick</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ path('admin') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">New trick</li>
+        </ol>
+        <div class="row">
+            <div class="col-lg-12 col-xs-12 col-sm-12">
+                <div class="card " style="width: 100%">
+                    <div class="card-header">
+                        <h4 class="float-left">Add new trick</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                {{ include ('backend/trick/_form.html.twig', {form: form}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

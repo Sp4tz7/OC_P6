@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}Tricks {{ parent() }}{% endblock %}
+{% block container %}
+    <div class="background-header"></div>
+        <div class="container">
+            <section id="tricks" class="text-uppercase text-center mt-5 pb-5">
+                {% if category is defined %}
+                <h1 class="text-uppercase">{{ category.getName }}</h1>
+                {% endif %}
+                <h2 class="mt-5">Tricks</h2>
+                <p class="text-muted mb-5">Choose your trick</p>
+                <hr class="hr-short">
+                <div class="text-center">
+                    {% include 'core/_tricks.html.twig' %}
+                </div>
+            </section>
+        </div>
+{% endblock %}

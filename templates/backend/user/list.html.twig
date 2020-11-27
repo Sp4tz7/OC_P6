@@ -1,0 +1,73 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Administration - Liste des utilisateurs{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ path('admin') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Liste des utilisateurs</li>
+        </ol>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Liste de tous les utilisateurs
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Nom complet</th>
+                                    <th>Nom d'utilisateur</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Portfolios</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Nom complet</th>
+                                    <th>Nom d'utilisateur</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Portfolios</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>{{ user.getFirstname }} {{ user.getLastname }}</td>
+                                        <td>{{ user.getUsername }}</td>
+                                        <td>{{ user.getEmail }}</td>
+                                        <td>{% if user.getRoles.0 == 'ROLE_SUPER_ADMIN' %}
+                                                Super admin
+                                            {% elseif user.getRoles.0 == 'ROLE_ADMIN' %}
+                                                Editor
+                                            {% elseif user.getRoles.0 == 'ROLE_USER' %}
+                                                Member
+                                            {% endif %}</td>
+                                        <td>{{ user.getTricks|length }}</td>
+                                        <td>
+                                            <a href="{{ path('admin-user-edit', {'id': user.getId()}) }}"><i
+                                                        class="fas fa-pencil-alt" title="Edit user"></i></a>
+                                            <a href="#" data-target="#modal" data-toggle="modal" class="delete_user"
+                                               title="Delete user"
+                                               data-id="{{ user.getId() }}"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

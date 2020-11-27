@@ -1,0 +1,3 @@
+Congratulation, your account has been created.
+hi {{ user.getFirstname }}. To activate your account, please click <a
+        href="{{ absolute_url(path('activate-account', {'token': user.getToken})) }}">this link</a>

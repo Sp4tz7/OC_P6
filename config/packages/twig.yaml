@@ -1,0 +1,9 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    form_themes: [ 'bootstrap_4_layout.html.twig' ]
+    globals:
+        avatar_img_url: '%avatar_img_url%'
+        tricks_img_url: '%tricks_img_url%'
+        limit_tricks: '%app.limit_tricks%'
+        limit_comments: '%app.limit_comments%'
+        class: ''

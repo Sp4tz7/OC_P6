@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<title>jQuery timeframe.js Examples</title>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+    <div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="http://www.jqueryscript.net/chart-graph/Drawing-A-Simple-Horizontal-Timeline-with-jQuery-SVG-timeframe-js.html">Download This Plugin</a></li>
+<li><a href="http://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<h1 style="margin-top:150px; text-align:center">jQuery timeframe.js Examples</h1>
+		<div class="container">
+		  <h2>Star Wars Release Dates</h2>
+
+			<div id="timeframe"></div>
+		</div>
+    <div class="container">
+			<h2>US Presidents</h2>
+            <div id="timeframe-2"></div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="../lib/timeframe.js"></script>
+		<script>
+
+		var starWarsFilms = {
+			name: "Star Wars Films",
+			color: "#000000",
+			events: [
+				{
+					name: "A New Hope",
+					date: "1977-05-25"
+				},
+				{
+					name: "The Empire Strikes Back",
+					date: "1980-05-21"
+				},
+				{
+					name: "Return of the Jedi",
+					date: "1983-05-25"
+				}
+			]
+		};
+
+		var t = Timeframe("#timeframe")
+			.addCategory(starWarsFilms)
+			.start("1975-01-01")
+			.end("1985-01-01")
+			.draw();
+
+var presidents = {
+			name: "US Presidents",
+			color: "#000000",
+			spans: [
+				{
+					name: "George Washington",
+					start: "1789-04-30",
+					end: "1797-03-04"
+				},
+				{
+					name: "John Adams",
+					start: "1797-03-04",
+					end: "1801-03-04"
+				},
+				{
+					name: "Thomas Jefferson",
+					start: "1801-03-04",
+					end: "1809-03-04"
+				},
+				{
+					name: "James Madison",
+					start: "1809-03-04",
+					end: "1817-03-04"
+				},
+				{
+					name: "James Monroe",
+					start: "1817-03-04",
+					end: "1825-03-04"
+				}
+			]
+		};
+
+		var t2 = Timeframe("#timeframe-2")
+			.addCategory(presidents)
+			.start("1787-01-01")
+			.end("1826-01-01")
+			.majorTicks(5, "years")
+			.minorTicks(1, "year")
+			.draw();
+		</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+	</body>
+</html>
