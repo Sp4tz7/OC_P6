@@ -14,6 +14,17 @@ body {
   background-color: $secondary-color;
 }
 
+
+a {
+  color: $third-color;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $primary-color !important;
+  text-decoration: underline;
+}
+
 a,
 a.nav-link,
 .navbar-dark .navbar-nav .nav-link {
@@ -31,7 +42,7 @@ a.nav-link:hover {
   font-style: italic;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0px;
+  letter-spacing: 0;
 }
 
 h1 {
@@ -107,17 +118,6 @@ footer a {
 }
 
 
-a {
-  color: $third-color;
-  text-decoration: none;
-}
-
-a:hover {
-  color: $primary-color !important;
-  text-decoration: underline;
-}
-
-
 .trick-container img {
   width: 100%;
   max-height: 100vh;
@@ -135,6 +135,11 @@ a.navbar-brand {
   padding: 0 1em;
   border-radius: 4px;
   z-index: 1;
+}
+
+
+.trick-box img {
+  min-height: 150px;
 }
 
 a.navbar-brand img {
@@ -204,20 +209,20 @@ a.navbar-brand img {
   color: rgb(255, 255, 255);
   text-decoration: none;
   white-space: nowrap;
-  min-height: 0px;
-  min-width: 0px;
+  min-height: 0;
+  min-width: 0;
   max-height: none;
   max-width: none;
   text-align: inherit;
   line-height: 135px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   font-weight: 900;
   font-size: 119px;
   padding-left: 15px;
   padding-right: 15px;
   transform-origin: 50% 50%;
   opacity: 1;
-  transform: translate(0px, 0px);
+  transform: translate(0px, 0);
   visibility: visible;
   text-shadow: 0.5px 0.5px 0.5px #505a61;
 }
@@ -262,7 +267,6 @@ a.navbar-brand img {
   font-size: 5em;
   font-weight: 800;
   border-left: 5px solid;
-  padding-left: 0.5em;
   color: $primary-color;
   background-color: #29709d94;
   padding: 0 1em 0 0.5em;
@@ -306,15 +310,16 @@ a.navbar-brand img {
   right: 15%;
 }
 
+.trick-container .trick-admin-action {
+  top: 12%;
+  right: 22%;
+}
+
 #tricks .trick-admin-action {
   right: 0;
   top: 113px;
 }
 
-.trick-container .trick-admin-action {
-  top: 12%;
-  right: 22%;
-}
 
 .trick-admin-action form {
   display: inline-block;
@@ -381,9 +386,6 @@ a.navbar-brand img {
   display: none;
 }
 
-.trick-box img {
-  min-height: 150px;
-}
 
 .comment-form label {
   display: none;
@@ -419,6 +421,7 @@ a.navbar-brand img {
 .media-button {
   display: none;
 }
+
 
 @media all and (max-width: 1024px) {
   #home h1 {

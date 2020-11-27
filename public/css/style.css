@@ -1,476 +1,477 @@
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  color: #3377a2;
-  background-color: #fff;
+    font-family: "Roboto", sans-serif;
+    color: #3377a2;
+    background-color: #fff;
+}
+
+a {
+    color: #3377a2;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #eca549 !important;
+    text-decoration: underline;
 }
 
 a,
 a.nav-link,
 .navbar-dark .navbar-nav .nav-link {
-  color: #eca549;
+    color: #eca549;
 }
 
 a.nav-link:hover {
-  color: #fff !important;
-  border-radius: 4px;
+    color: #fff !important;
+    border-radius: 4px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  font-family: Raleway, sans-serif;
-  font-weight: 700;
-  font-style: italic;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0px;
+    font-family: Raleway, sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0;
 }
 
 h1 {
-  font-family: "Exo 2", cursive;
+    font-family: "Exo 2", cursive;
 }
 
 h2.card-text {
-  font-size: 1.3em;
+    font-size: 1.3em;
 }
 
 h4 {
-  color: #3f444a;
-  font-size: 16px;
-  margin: 8px 0;
+    color: #3f444a;
+    font-size: 16px;
+    margin: 8px 0;
 }
 
 header {
-  position: absolute;
-  z-index: 8000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  min-height: 100px;
-  color: #fff;
-  background: linear-gradient(to bottom, #1a6695, #3377a2);
+    position: absolute;
+    z-index: 8000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100px;
+    color: #fff;
+    background: linear-gradient(to bottom, #1a6695, #3377a2);
 }
 
 .header-full header {
-  background: transparent;
+    background: transparent;
 }
 
 .header-full header.sticky-top {
-  background: linear-gradient(to bottom, #1a6695, #3377a2);
+    background: linear-gradient(to bottom, #1a6695, #3377a2);
 }
 
 footer {
-  background-color: #202528;
-  color: #4f5051;
+    background-color: #202528;
+    color: #4f5051;
 }
 
 footer a {
-  color: #7e8081;
+    color: #7e8081;
 }
 
 .btn-primary {
-  background-color: #eca549 !important;
-  border-color: #eca549 !important;
-  color: #fff !important;
+    background-color: #eca549 !important;
+    border-color: #eca549 !important;
+    color: #fff !important;
 }
 
 .btn-secondary {
-  background-color: #fff !important;
-  border-color: #fff !important;
+    background-color: #fff !important;
+    border-color: #fff !important;
 }
 
 .btn-primary:hover,
 .btn-primary:active {
-  background-color: #eca549 !important;
-  color: #fff !important;
-  border-color: #fff !important;
+    background-color: #eca549 !important;
+    color: #fff !important;
+    border-color: #fff !important;
 }
 
 .btn-secondary:hover,
 .btn-secondary:active {
-  background-color: #fff !important;
-  color: #eca549 !important;
-  border-color: #eca549 !important;
+    background-color: #fff !important;
+    color: #eca549 !important;
+    border-color: #eca549 !important;
 }
 
 .container-fluid {
-  min-height: 85vh;
-  padding: 0;
-}
-
-a {
-  color: #3377a2;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #eca549 !important;
-  text-decoration: underline;
+    min-height: 85vh;
+    padding: 0;
 }
 
 .trick-container img {
-  width: 100%;
-  max-height: 100vh;
+    width: 100%;
+    max-height: 100vh;
 }
 
 .trick-comment-image img,
 .avatar {
-  vertical-align: middle;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 a.navbar-brand {
-  padding: 0 1em;
-  border-radius: 4px;
-  z-index: 1;
+    padding: 0 1em;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.trick-box img {
+    min-height: 150px;
 }
 
 a.navbar-brand img {
-  width: 100%;
+    width: 100%;
 }
 
 .pagination-content {
-  margin: auto;
+    margin: auto;
 }
 
 .container-fluid .container {
-  max-width: 60%;
+    max-width: 60%;
 }
 
 .bg-light-blue {
-  background-color: #edf4f8;
+    background-color: #edf4f8;
 }
 
 .home-background {
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-  background-position: center;
-  background-image: url("../img/home.jpg");
-  top: 0;
-  left: 0;
-  width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+    background-image: url("../img/home.jpg");
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .background-header {
-  height: 25vh;
-  background-position: center;
-  background-image: url(../img/home.jpg);
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
+    height: 25vh;
+    background-position: center;
+    background-image: url(../img/home.jpg);
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
 }
 
 #home .box-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .home-caption {
-  max-width: 1230px;
-  color: white;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  z-index: 2;
-  transform: translate3d(-50%, -50%, 0);
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: absolute;
+    max-width: 1230px;
+    color: white;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    z-index: 2;
+    transform: translate3d(-50%, -50%, 0);
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: absolute;
 }
 
 #home h1 {
-  text-transform: uppercase;
-  font-style: italic;
-  height: auto;
-  width: auto;
-  color: white;
-  text-decoration: none;
-  white-space: nowrap;
-  min-height: 0px;
-  min-width: 0px;
-  max-height: none;
-  max-width: none;
-  text-align: inherit;
-  line-height: 135px;
-  letter-spacing: 0px;
-  font-weight: 900;
-  font-size: 119px;
-  padding-left: 15px;
-  padding-right: 15px;
-  transform-origin: 50% 50%;
-  opacity: 1;
-  transform: translate(0px, 0px);
-  visibility: visible;
-  text-shadow: 0.5px 0.5px 0.5px #505a61;
+    text-transform: uppercase;
+    font-style: italic;
+    height: auto;
+    width: auto;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+    min-height: 0;
+    min-width: 0;
+    max-height: none;
+    max-width: none;
+    text-align: inherit;
+    line-height: 135px;
+    letter-spacing: 0;
+    font-weight: 900;
+    font-size: 119px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transform-origin: 50% 50%;
+    opacity: 1;
+    transform: translate(0px, 0);
+    visibility: visible;
+    text-shadow: 0.5px 0.5px 0.5px #505a61;
 }
 
 .slogan {
-  font-size: 3.75em;
-  font-weight: 900;
-  font-style: italic;
-  line-height: 1.03;
-  text-decoration: none;
-  text-transform: uppercase;
-  margin-top: 2.075em;
-  margin-bottom: 0.5em;
-  color: #505a61;
+    font-size: 3.75em;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1.03;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-top: 2.075em;
+    margin-bottom: 0.5em;
+    color: #505a61;
 }
 
 .link-down {
-  color: #fff;
+    color: #fff;
 }
 
 .hr-short {
-  position: relative;
-  max-width: 70px;
-  border: 0;
-  border-top: 6px solid #eca549;
-  text-align: left;
-  margin: 10px auto 30px;
+    position: relative;
+    max-width: 70px;
+    border: 0;
+    border-top: 6px solid #eca549;
+    text-align: left;
+    margin: 10px auto 30px;
 }
 
 .trick-description {
-  padding: 2em;
-  font-size: 1.3em;
-  background-color: #3377a2;
-  color: #fff;
-  width: 100%;
+    padding: 2em;
+    font-size: 1.3em;
+    background-color: #3377a2;
+    color: #fff;
+    width: 100%;
 }
 
 .trick-name {
-  position: absolute;
-  top: calc(0px + 20%);
-  left: 35%;
-  font-size: 5em;
-  font-weight: 800;
-  border-left: 5px solid;
-  padding-left: 0.5em;
-  color: #eca549;
-  background-color: #29709d94;
-  padding: 0 1em 0 0.5em;
+    position: absolute;
+    top: calc(0px + 20%);
+    left: 35%;
+    font-size: 5em;
+    font-weight: 800;
+    border-left: 5px solid;
+    color: #eca549;
+    background-color: #29709d94;
+    padding: 0 1em 0 0.5em;
 }
 
 .trick-image-item,
 .trick.trick-video-item {
-  max-width: 25%;
-  margin: 1.5em;
-  float: left;
+    max-width: 25%;
+    margin: 1.5em;
+    float: left;
 }
 
 .trick-meta {
-  padding: 1em;
-  border: 0.5px solid;
+    padding: 1em;
+    border: 0.5px solid;
 }
 
 .trick-category-item {
-  background-color: #fff;
-  color: #eca549;
-  padding: 2px 6px 1px 6px;
-  margin: 0 2px;
+    background-color: #fff;
+    color: #eca549;
+    padding: 2px 6px 1px 6px;
+    margin: 0 2px;
 }
 
 .trick-comment {
-  border: 1px solid;
-  padding: 1em;
-  margin-top: 2em;
-  background-color: #ffece6;
+    border: 1px solid;
+    padding: 1em;
+    margin-top: 2em;
+    background-color: #ffece6;
 }
 
 .trick-comment-date {
-  font-size: 0.7em;
-  float: right;
-  margin-top: 0.5em;
+    font-size: 0.7em;
+    float: right;
+    margin-top: 0.5em;
 }
 
 .trick-admin-action {
-  position: absolute;
-  top: 15%;
-  right: 15%;
-}
-
-#tricks .trick-admin-action {
-  right: 0;
-  top: 113px;
+    position: absolute;
+    top: 15%;
+    right: 15%;
 }
 
 .trick-container .trick-admin-action {
-  top: 12%;
-  right: 22%;
+    top: 12%;
+    right: 22%;
+}
+
+#tricks .trick-admin-action {
+    right: 0;
+    top: 113px;
 }
 
 .trick-admin-action form {
-  display: inline-block;
+    display: inline-block;
 }
 
 .trick-admin-action a,
 .trick-admin-action button {
-  font-size: 1em;
-  margin: 0.5em;
-  color: #fff;
+    font-size: 1em;
+    margin: 0.5em;
+    color: #fff;
 }
 
 #tricks .trick-admin-action a,
 .trick-admin-action button {
-  font-size: 1em;
-  margin: 0;
-  color: #fff;
+    font-size: 1em;
+    margin: 0;
+    color: #fff;
 }
 
 #trick-list,
 #trick-loader {
-  min-height: 20vh;
+    min-height: 20vh;
 }
 
 .delete_trick {
-  background: no-repeat;
-  border: none;
+    background: no-repeat;
+    border: none;
 }
 
 .login-container {
-  text-align: center;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .login-form {
-  max-width: 500px;
-  margin: auto;
+    max-width: 500px;
+    margin: auto;
 }
 
 .login-form input {
-  border: none;
-  border-bottom: 3px solid #3377a2;
+    border: none;
+    border-bottom: 3px solid #3377a2;
 }
 
 .comment-box {
-  border-left: 2px solid;
-  background-color: #fff;
-  box-shadow: 0 0 3.125em rgba(72, 111, 142, 0.1);
-  border-radius: 0.313em;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0.9em 1.9em 0.75em;
+    border-left: 2px solid;
+    background-color: #fff;
+    box-shadow: 0 0 3.125em rgba(72, 111, 142, 0.1);
+    border-radius: 0.313em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0.9em 1.9em 0.75em;
 }
 
 .comment-box,
 .trick-box {
-  display: none;
-}
-
-.trick-box img {
-  min-height: 150px;
+    display: none;
 }
 
 .comment-form label {
-  display: none;
+    display: none;
 }
 
 .comment-form button {
-  float: right;
+    float: right;
 }
 
 .media-heading {
-  margin-top: 0;
-  margin-bottom: 5px;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 0.9em;
+    margin-top: 0;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 0.9em;
 }
 
 .media-object {
-  height: 50px;
-  width: 50px;
-  border-radius: 50px !important;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px !important;
 }
 
 .c-date {
-  font-size: 0.8em;
+    font-size: 0.8em;
 }
 
 .media-left {
-  display: table-cell;
-  vertical-align: top;
-  padding-right: 10px;
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 10px;
 }
 
 .media-button {
-  display: none;
+    display: none;
 }
 
 @media all and (max-width: 1024px) {
-  #home h1 {
-    white-space: initial;
-    line-height: initial;
-    font-size: 4.6em;
-  }
+    #home h1 {
+        white-space: initial;
+        line-height: initial;
+        font-size: 4.6em;
+    }
 
-  .slogan {
-    font-size: 3em;
-  }
+    .slogan {
+        font-size: 3em;
+    }
 }
+
 @media all and (max-width: 768px) {
-  #home h1 {
-    font-size: 3.6em;
-  }
+    #home h1 {
+        font-size: 3.6em;
+    }
 
-  .slogan {
-    font-size: 2em;
-  }
+    .slogan {
+        font-size: 2em;
+    }
 
-  .sticky-top {
-    height: 100%;
-  }
+    .sticky-top {
+        height: 100%;
+    }
 
-  .flex-row {
-    -ms-flex-direction: column !important;
-    flex-direction: column !important;
-  }
+    .flex-row {
+        -ms-flex-direction: column !important;
+        flex-direction: column !important;
+    }
 
-  .nav-item .btn {
-    max-width: 80px;
-  }
+    .nav-item .btn {
+        max-width: 80px;
+    }
 
-  .trick-name {
-    left: 10%;
-    font-size: 4em;
-  }
+    .trick-name {
+        left: 10%;
+        font-size: 4em;
+    }
 
-  .media-content {
-    display: none;
-    overflow: hidden;
-  }
+    .media-content {
+        display: none;
+        overflow: hidden;
+    }
 
-  .media-content div {
-    float: left;
-  }
+    .media-content div {
+        float: left;
+    }
 
-  .media-button {
-    display: block;
-  }
+    .media-button {
+        display: block;
+    }
 }
-@media all and (max-width: 412px) {
-  .container-fluid .container {
-    max-width: 80%;
-  }
 
-  .c-date {
-    float: left !important;
-    margin-bottom: 1em;
-  }
+@media all and (max-width: 412px) {
+    .container-fluid .container {
+        max-width: 80%;
+    }
+
+    .c-date {
+        float: left !important;
+        margin-bottom: 1em;
+    }
 }
 
 /*# sourceMappingURL=style.css.map */
