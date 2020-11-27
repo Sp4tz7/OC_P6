@@ -43,7 +43,13 @@ h4 {
 }
 
 header {
-  height: 10vh;
+  position: absolute;
+  z-index: 8000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100px;
   color: #fff;
   background: linear-gradient(to bottom, #1a6695, #3377a2);
 }
@@ -146,7 +152,19 @@ a.navbar-brand img {
   height: 100vh;
   background-position: center;
   background-image: url("../img/home.jpg");
-  margin-top: -10vh;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.background-header {
+  height: 25vh;
+  background-position: center;
+  background-image: url(../img/home.jpg);
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
 }
 
 #home .box-center {
@@ -239,6 +257,8 @@ a.navbar-brand img {
   border-left: 5px solid;
   padding-left: 0.5em;
   color: #eca549;
+  background-color: #29709d94;
+  padding: 0 1em 0 0.5em;
 }
 
 .trick-image-item,
@@ -386,6 +406,72 @@ a.navbar-brand img {
   display: table-cell;
   vertical-align: top;
   padding-right: 10px;
+}
+
+.media-button {
+  display: none;
+}
+
+@media all and (max-width: 1024px) {
+  #home h1 {
+    white-space: initial;
+    line-height: initial;
+    font-size: 4.6em;
+  }
+
+  .slogan {
+    font-size: 3em;
+  }
+}
+@media all and (max-width: 768px) {
+  #home h1 {
+    font-size: 3.6em;
+  }
+
+  .slogan {
+    font-size: 2em;
+  }
+
+  .sticky-top {
+    height: 100%;
+  }
+
+  .flex-row {
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+  }
+
+  .nav-item .btn {
+    max-width: 80px;
+  }
+
+  .trick-name {
+    left: 10%;
+    font-size: 4em;
+  }
+
+  .media-content {
+    display: none;
+    overflow: hidden;
+  }
+
+  .media-content div {
+    float: left;
+  }
+
+  .media-button {
+    display: block;
+  }
+}
+@media all and (max-width: 412px) {
+  .container-fluid .container {
+    max-width: 80%;
+  }
+
+  .c-date {
+    float: left !important;
+    margin-bottom: 1em;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

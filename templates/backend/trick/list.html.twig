@@ -60,6 +60,8 @@
                                         <td>{{ trick.getDateAdd|date('d.m.Y') }}</td>
                                         <td>
                                             <div class="trick-admin-action">
+                                                <a href="{{ path('show-trick', {'category': trick.getCategory[0].getSlug, 'trick': trick.getSlug}) }}">
+                                                    <i class="fas fa-eye"></i></a>
                                                 <a href="{{ path('admin-trick-edit', {'id': trick.getId }) }}">
                                                     <i class="fas fa-edit"></i></a>
                                                 <button type="button" class="delete_trick" data-toggle="modal"

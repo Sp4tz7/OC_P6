@@ -140,6 +140,7 @@ class TrickController extends AbstractController
             [
                 'categories' => $trickCatRepository->findAll(),
                 'tricks' => $trickRepository->findBy([], ['date_add' => 'DESC']),
+                'class' => 'header-full',
             ]);
     }
 
@@ -185,6 +186,7 @@ class TrickController extends AbstractController
             [
                 'category' => $category,
                 'tricks' => $category->getTricks(),
+                'class' => 'header-full',
             ]
         );
     }

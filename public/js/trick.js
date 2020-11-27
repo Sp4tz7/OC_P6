@@ -10,6 +10,7 @@ const Trick = function () {
             }
         });
 
+
         $('.scrollTricks').on('click', function (){
             $('html, body').animate({scrollTop: $('#tricks').offset().top -95 }, 'slow');
         });
@@ -55,6 +56,11 @@ const Trick = function () {
             if ($(".comment-box:hidden").length === 0) {
                 $("#loadMoreComments").fadeOut("slow");
             }
+        });
+        $(".media-button").on("click", function (e) {
+            e.preventDefault();
+            $(".media-button").hide();
+            $(".media-content").show();
         });
 
     };

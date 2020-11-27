@@ -26,7 +26,7 @@ class Trick
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $name;
 
@@ -63,7 +63,7 @@ class Trick
     private $added_by;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $slug;
 
