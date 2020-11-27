@@ -129,6 +129,11 @@ a.navbar-brand {
   z-index: 1;
 }
 
+.media-content img,
+.media-content iframe {
+  min-height: 190px;
+}
+
 .trick-box img {
   min-height: 150px;
 }
@@ -213,7 +218,7 @@ a.navbar-brand img {
   padding-right: 15px;
   transform-origin: 50% 50%;
   opacity: 1;
-  transform: translate(0px, 0);
+  transform: translate(0, 0);
   visibility: visible;
   text-shadow: 0.5px 0.5px 0.5px #505a61;
 }
@@ -373,10 +378,6 @@ a.navbar-brand img {
 .comment-box,
 .trick-box {
   display: none;
-}
-
-.media-content img, .media-content iframe {
-  min-height: 190px;
 }
 
 .comment-form label {
