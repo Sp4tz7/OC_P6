@@ -386,6 +386,9 @@ a.navbar-brand img {
   display: none;
 }
 
+.media-content img, .media-content iframe {
+  min-height: 190px;
+}
 
 .comment-form label {
   display: none;
@@ -422,13 +425,13 @@ a.navbar-brand img {
   display: none;
 }
 
-
 @media all and (max-width: 1024px) {
   #home h1 {
     white-space: initial;
     line-height: initial;
     font-size: 4.6em;
   }
+
   .slogan {
     font-size: 3em;
   }
@@ -438,6 +441,7 @@ a.navbar-brand img {
   #home h1 {
     font-size: 3.6em;
   }
+
   .slogan {
     font-size: 2em;
   }
@@ -445,6 +449,7 @@ a.navbar-brand img {
   .sticky-top {
     height: 100%;
   }
+
   .flex-row {
     -ms-flex-direction: column !important;
     flex-direction: column !important;
@@ -453,17 +458,21 @@ a.navbar-brand img {
   .nav-item .btn {
     max-width: 80px;
   }
+
   .trick-name {
     left: 10%;
     font-size: 4em;
   }
+
   .media-content {
     display: none;
     overflow: hidden;
   }
+
   .media-content div {
     float: left;
   }
+
   .media-button {
     display: block;
   }
@@ -473,6 +482,7 @@ a.navbar-brand img {
   .container-fluid .container {
     max-width: 80%;
   }
+
   .c-date {
     float: left !important;
     margin-bottom: 1em;
